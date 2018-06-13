@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-
-
 from gensim.models import word2vec
 import jieba
 import pdb
@@ -11,7 +9,7 @@ from pprint import pprint
 
 # print(os.getcwd())
 
-stopwords = ['（', '）', '(', ')', ' ', '、']
+# stopwords = ['（', '）', '(', ')', ' ', '、']
 
 class GetSentences(object):
     def __init__(self, filepath):
@@ -31,7 +29,7 @@ def getStopwords(filepath):
         return words.split('\n')
 
 # 分词作为模型训练输入
-def parserCompanyName(name_generator):
+def parserCompanyName(name_generator, stopwords):
     train_sen = []
     with open('./parser_company_name_10000V2.txt', 'w') as f:
         for item in name_generator:
@@ -86,8 +84,11 @@ def trigger():
     sentences = GetSentences(filepath)
     # readLineFromGenerator(sentences)
 
+    stopwords_file = './stopwords_words.txt'
+    stopwords = getStopwords(stopwords_file)
+
     # 分词 - 作为训练模型的输入
-    train_sen = parserCompanyName(sentences)
+    train_sen = parserCompanyName(sentences, stopwords)
     # print(train_sen)
 
     # 训练并保存模型
@@ -135,11 +136,18 @@ def countWordFre(filepath):
 if __name__ == '__main__':
 
     # 训练常量设置
+    # MIN_COUNT = 0  # 忽略词频小于MIN_COUNT的  
+    # CPU_NUM = 3  # CPU核心数
+    # VEC_SIZE = 100  # size - 特征向量维度
+    # CONTEXT_WINDOW = 1  # window - 上下文提取词的最大距离
+    # SG = 1  # 1 -> skip-gram; Otherwise, CBOW is used.
+
     MIN_COUNT = 0  # 忽略词频小于MIN_COUNT的  
     CPU_NUM = 3  # CPU核心数
-    VEC_SIZE = 100  # size - 特征向量维度
-    CONTEXT_WINDOW = 1  # window - 上下文提取词的最大距离
+    VEC_SIZE = 200  # size - 特征向量维度
+    CONTEXT_WINDOW = 2  # window - 上下文提取词的最大距离
     SG = 1  # 1 -> skip-gram; Otherwise, CBOW is used.
+
 
     # # 停词表
     # stopwords_file = './stopwords.txt'

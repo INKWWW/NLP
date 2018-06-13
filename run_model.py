@@ -46,7 +46,8 @@ def parserSen(test_sentence, stopwords):
 def getSenVec(parser_list, model):
     '''由词得到句向量'''
     num_word = len(parser_list)
-    temp = np.zeros([100,])
+    # temp = np.zeros([100,])
+    temp = np.zeros([200,])
     for test_word in parser_list:
         try:
             wordVec_new = findWordVec(model, test_word)
@@ -66,17 +67,20 @@ def getSenVec(parser_list, model):
 def cosDist(senVec1, senVec2):
     '''计算cos距离'''
     cos = np.dot(senVec1.T, senVec2) / (np.linalg.norm(senVec1) * np.linalg.norm(senVec2))
-    normalized_sim = 0.5 + 0.5 * cos
+    # normalized_sim = 0.5 + 0.5 * cos
     print('------cosDist-------')
-    print(normalized_sim)
-    return normalized_sim
+    # print(normalized_sim)
+    # return normalized_sim
+    print(cos)
+    return cos
 
 def euclideanDist(senVec1, senVec2):
     '''计算欧几里得距离'''
     euclidean = np.linalg.norm(senVec1 - senVec2)
     print('------euclideanDist-------')
-    print(euclidean)
-    # normalized_sim = 1.0 / (euclidean + 1.0)
+    # print(euclidean)
+    normalized_sim = 1.0 / (euclidean + 1.0)
+    print(normalized_sim)
 
 # 总函数
 def operation(model, test_sentence_1, test_sentence_2):
@@ -90,8 +94,8 @@ def operation(model, test_sentence_1, test_sentence_2):
     senVec_2 = getSenVec(parser_list_2, model)
 
     print('---------最终相似度-----------')
-    # cosDist(senVec_1, senVec_2)
-    euclideanDist(senVec_1, senVec_2)
+    cosDist(senVec_1, senVec_2)
+    # euclideanDist(senVec_1, senVec_2)
     
 
 if __name__ == '__main__':
@@ -102,13 +106,42 @@ if __name__ == '__main__':
     model_name = '\\word2vec_model_10000_skip.model'
     model_output = dirname + model_name
 
-    test_sentence_1 = '哈尔滨久久华康科技有限公司'
-    # test_sentence_2 = '哈尔滨久久华康有限公司'  # cos：0.9999748133070578  .0  enclidean：0.10381817865051336  V2:0.1393186701868827
-    test_sentence_2 = '哈尔滨长久华康科技有限公司'  # cos：1.0  0.0  enclidean：0.0  V2:0.0
-    # test_sentence_2 = '北京市百融金服科技有限公司'  # cos：0.9999839620230886  0.043129391793413574  enclidean：0.027304886398964206  V2:0.030312174677792212
-    # test_sentence_2 = '北京市百融金服科技公司'  # cos：0.9999839620230886  0.043129391793413574  enclidean：0.027304886398964206  V2:0.11785001169482552
-    # test_sentence_2 = '四川省百融金服科技有限公司'  # cos：  0.07568612905089231  enclidean：0.0520855644828885  V2:0.12377131385837323  0.02897386663929932
-    # test_sentence_2 = '四川省百融金服有限公司'  # cos：  0.07568612905089231  enclidean：0.16771822181146087  V2:0.2934710911310562  0.1832938640796101
+    # test_sentence_1 = '哈尔滨久久华康科技有限公司'
+    # # test_sentence_2 = '哈尔滨久久华康有限公司'  # cos：0.9999748133070578  .0  enclidean：0.10381817865051336  V2:0.1393186701868827
+    # test_sentence_2 = '哈尔滨长久华康科技有限公司'  # cos：1.0  0.0  enclidean：0.0  V2:0.0
+    # # test_sentence_2 = '北京市百融金服科技有限公司'  # cos：0.9999839620230886  0.043129391793413574  enclidean：0.027304886398964206  V2:0.030312174677792212
+    # # test_sentence_2 = '北京市百融金服科技公司'  # cos：0.9999839620230886  0.043129391793413574  enclidean：0.027304886398964206  V2:0.11785001169482552
+    # # test_sentence_2 = '四川省百融金服科技有限公司'  # cos：  0.07568612905089231  enclidean：0.0520855644828885  V2:0.12377131385837323  0.02897386663929932
+    # # test_sentence_2 = '四川省百融金服有限公司'  # cos：  0.07568612905089231  enclidean：0.16771822181146087  V2:0.2934710911310562  0.1832938640796101
+
+    # # 第一组测试
+    # test_sentence_1 = '哈尔滨久久华康科技有限公司'
+    # test_sentence_2 = '哈尔滨久久华康有限公司'  # 0.0
+    # test_sentence_2 = '哈尔滨长久华康科技有限公司'  # 0.022203229313000852   0.0
+    # test_sentence_2 = '哈尔滨长久康华科技有限公司'  # 0.05328034558352251  0.007523175114716447  0.008065828246018075
+
+    # test_sentence_2 = '黑龙江长久康华科技有限公司'  # 0.042524020642892055  0.07734101603986997
+    # test_sentence_2 = '黑龙江久久康华科技有限公司'  # 0.030177443023447763  0.07734101603986997
+    # test_sentence_2 = '黑龙江久久华康科技有限公司'  # 0.11105165879285421  0.10335089333917838
+
+    # test_sentence_2 = '北京市百融金服科技有限公司'  # 0.02750834860840494  0.017958557949121177  0.013522223661126041
+    # test_sentence_2 = '北京市百融金服科技公司'  # 0.02750834860840494  0.017958557949121177  
+    # test_sentence_2 = '四川省百融金服科技有限公司'  # 0.09338489938119292  0.10301095735634219  0.014167722860191728
+    # # test_sentence_2 = '四川省百融金服有限公司'  # 0.09338489938119292  0.10301095735634219  0.014167722860191728
+
+    # 第二组测试
+    # test_sentence_1 = '黑龙江红兴隆农垦民乐农业生产资料有限公司'
+    # test_sentence_2 = '黑龙江红兴隆农垦民乐农业生产资料有限公司'  # 0.0
+    # test_sentence_2 = '黑龙江红兴隆农垦民乐农业有限公司'  # 0.037899128553774  0.0
+    # test_sentence_2 = '黑龙江红兴隆农垦民乐有限公司'  # 0.10465808393829548  0.15634690247603167  0.022769100045612813
+    # test_sentence_2 = '黑龙江红兴隆农垦民乐生产资料有限公司'  # 0.12483684740017804  0.15634690247603167  0.022769100045612813
+    # test_sentence_2 = '黑龙江红隆农垦民乐农业有限公司'  # 0.09307739644613543  0.08167516464292726  0.005218276287039758
+    # test_sentence_2 = '黑龙江红兴隆农垦民乐农业有限公司'  # 0.0
+
+    # 第三组测试
+    # test_sentence_1 = '蚌埠悠然酒店管理有限公司'
+    # test_sentence_2 = '安徽省蚌埠悠然酒店管理有限公司'  # 0.011131538396269902
+
 
     # 加载模型
     w2v_model = loadModel(model_output)

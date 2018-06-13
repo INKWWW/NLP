@@ -46,7 +46,8 @@ def parserSen(test_sentence, stopwords):
 def getSenVec(parser_list, model):
     '''由词得到句向量'''
     num_word = len(parser_list)
-    temp = np.zeros([100,])
+    # temp = np.zeros([100,])
+    temp = np.zeros([200,])
     for test_word in parser_list:
         try:
             wordVec_new = findWordVec(model, test_word)
@@ -102,16 +103,28 @@ if __name__ == '__main__':
     model_name = '\\word2vec_model_10000_fasttext_skip.model'
     model_output = dirname + model_name
 
+    # # 第一组测试
     test_sentence_1 = '哈尔滨久久华康科技有限公司'
     # test_sentence_2 = '哈尔滨久久华康有限公司'  # 0.0
-    # test_sentence_2 = '哈尔滨长久华康科技有限公司'  # 0.022203229313000852
-    # test_sentence_2 = '哈尔滨长久康华科技有限公司'  # 0.05328034558352251
-    # test_sentence_2 = '黑龙江长久康华科技有限公司'  # 0.042524020642892055
-    test_sentence_2 = '黑龙江久久康华科技有限公司'  # 0.030177443023447763
+    test_sentence_2 = '哈尔滨长久华康科技有限公司'  # 0.022203229313000852   0.023850804518552166
+    # # test_sentence_2 = '哈尔滨长久康华科技有限公司'  # 0.05328034558352251
+    # # test_sentence_2 = '黑龙江长久康华科技有限公司'  # 0.042524020642892055
+    # test_sentence_2 = '黑龙江久久康华科技有限公司'  # 0.030177443023447763
+    # test_sentence_2 = '黑龙江久久华康科技有限公司'  # 0.11105165879285421
     # test_sentence_2 = '北京市百融金服科技有限公司'  # 0.02750834860840494
-    # test_sentence_2 = '北京市百融金服科技公司'  # 0.02750834860840494
-    # test_sentence_2 = '四川省百融金服科技有限公司'  # 0.09338489938119292
-    # test_sentence_2 = '四川省百融金服有限公司'  # 0.09338489938119292
+    # # test_sentence_2 = '北京市百融金服科技公司'  # 0.02750834860840494
+    # # test_sentence_2 = '四川省百融金服科技有限公司'  # 0.09338489938119292
+    # # test_sentence_2 = '四川省百融金服有限公司'  # 0.09338489938119292
+    
+
+    # 第二组测试
+    # test_sentence_1 = '黑龙江红兴隆农垦民乐农业生产资料有限公司'
+    # test_sentence_2 = '黑龙江红兴隆农垦民乐农业生产资料有限公司'  # 0.0
+    # test_sentence_2 = '黑龙江红兴隆农垦民乐农业有限公司'  # 0.037899128553774
+    # test_sentence_2 = '黑龙江红兴隆农垦民乐有限公司'  # 0.10465808393829548
+    # test_sentence_2 = '黑龙江红兴隆农垦民乐生产资料有限公司'  # 0.12483684740017804
+    # test_sentence_2 = '黑龙江红隆农垦民乐农业有限公司'  # 0.09307739644613543
+
 
     # 加载模型
     w2v_model = loadModel(model_output)
