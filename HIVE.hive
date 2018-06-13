@@ -1,0 +1,19 @@
+# 复制表到自己的dadtabase
+CREATE table hanmo.dw_list AS SELECT * FROM wwh.dw_list;
+
+# 随机取100W条数据
+CREATE table hanmo.dw_list_train AS SELECT * FROM hanmo.dw_list ORDER BY RAND() LIMIT 1000000;
+
+# 查看有多少行
+SELECT COUNT(*) FROM dw_list;
+17578023
+
+# 查看不重复的公司名称的行数
+SELECT COUNT(DISTINCT dw_name) FROM dw_list;
+17529218
+
+# 服务器中运行，不在Hive中
+hive -e "SELECT * FROM hanmo.dw_list_train" > /home/hanmo.wang/dw_list_train.txt
+
+
+
