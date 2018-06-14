@@ -9,7 +9,7 @@ from pprint import pprint
 
 # print(os.getcwd())
 
-# stopwords = ['（', '）', '(', ')', ' ', '、']
+stopwords = ['（', '）', '(', ')', ' ', '、', '·']
 
 class GetSentences(object):
     def __init__(self, filepath):
@@ -84,8 +84,8 @@ def trigger():
     sentences = GetSentences(filepath)
     # readLineFromGenerator(sentences)
 
-    stopwords_file = './stopwords_words.txt'
-    stopwords = getStopwords(stopwords_file)
+    # stopwords_file = './stopwords_words.txt'
+    # stopwords = getStopwords(stopwords_file)
 
     # 分词 - 作为训练模型的输入
     train_sen = parserCompanyName(sentences, stopwords)
