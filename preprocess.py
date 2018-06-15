@@ -46,8 +46,8 @@ def compare(shorter_sen, longer_sen):
         else:
             continue
     if len(shorter_sen_copy) == 0:
-        print('@-----same-----')
-        return
+        # print('@-----same-----')
+        return True
     else:
         for item in shorter_sen_copy:
             for item_l in longer_sen_copy:
@@ -59,53 +59,61 @@ def compare(shorter_sen, longer_sen):
                     for index in indexs_l:
                         longer_sen_copy.pop(index)
     if len(shorter_sen_copy) == 0 or len(longer_sen_copy) == 0:
-        print('@@-----same-----')
-        return
-    elif len(shorter_sen_copy) == 1 or len(longer_sen_copy) == 1:
-        if shorter_sen.index(shorter_sen_copy[0]) == 0 or longer_sen.index(longer_sen_copy[0]) == 0:
-            print('@@@-----same-----')
-            return
+        # print('@@-----same-----')
+        return True
+    # elif len(shorter_sen_copy) == 1 or len(longer_sen_copy) == 1:
+    #     if shorter_sen.index(shorter_sen_copy[0]) == 0 or longer_sen.index(longer_sen_copy[0]) == 0:
+    #         # print('@@@-----same-----')
+    #         return True
     else:
-        print('-----may not be the same-----')
-        return
+        # print('-----may not be the same-----')
+        return False
 
-def evaluation():
-    '''计算precision、recall、F1
-    normal_pos, normal_neg, detected_pos, detected_neg
-    '''
-    # Ture Positive
+def predict(input_file, out_file, stopwords):    
+    base_name = []
+    input_name = []
+    base_result = []
+    predict_result = []
+    with open(input_file, 'r') as f:
+        fread = f.read()
+        lines = fread.split()
+        for line in lines:
+            line_split = line.split(',')
+            base_name.append(line_split[0])
+            input_name.append(line_split[1])
+            base_result.append(line_split[2])       
+            
+    length = len(input_name)
 
-    # Ture Negative
+    with open(out_file, 'w') as fw:
+        for i in range(0, length):
+            test_sentence_1 = base_name[i]
+            test_sentence_2 = input_name[i]
 
-    # False Negative
+            shorter_sen, longer_sen = processSen(test_sentence_1, test_sentence_2, stopwords)
+            result = compare(shorter_sen, longer_sen)
 
-    # Flase Positive
-
-    # precision
-    precision = tp / (tp + fp)
-
-    # recall
-    recall = tp / (tp + fn)
-
-    # F1-score
-    f1_score = 2 * ((precision * recall) / (precision + recall))
-
-    return (precision, recall, f1_score)
+            if result:
+                predict_result[i].append('1')
+            else:
+                predict_result[i].append('0')
+            
+            content = test_sentence_1 + ',' + test_sentence_2 + ',' + base_result[i] + ',' + predict_result[i] + ',' + str(result) + '\n'
+            fw.write(content)
+    return base_result, predict_result
 
 
 def main():
     filepath = 'stopwords_words.txt'
     stopwords = getStopwords(filepath)
 
-    test_sentence_1 = '黑龙江红兴隆农垦民乐农业生产资料有限公司'
-    # test_sentence_2 = '黑龙江红兴隆农垦民乐农业生产资料公司'
-    # test_sentence_2 = '黑龙江兴隆农垦民乐生产资料有限公司'
-    test_sentence_2 = '四川省红兴隆农垦民乐生产资料有限公司'
+    # test_sentence_1 = '黑龙江红兴隆农垦民乐农业生产资料有限公司'
+    # # test_sentence_2 = '黑龙江红兴隆农垦民乐农业生产资料公司'
+    # # test_sentence_2 = '黑龙江兴隆农垦民乐生产资料有限公司'
+    # test_sentence_2 = '四川省红兴隆农垦民乐生产资料有限公司'
     shorter_sen, longer_sen = processSen(test_sentence_1, test_sentence_2, stopwords)
     compare(shorter_sen, longer_sen)
 
 
 if __name__ == '__main__':
     main()
-
-    

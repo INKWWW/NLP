@@ -7,6 +7,7 @@ import pdb
 import os
 from pprint import pprint
 import numpy as np
+from decimal import Decimal
 
 
 # 加载停词
@@ -15,7 +16,7 @@ def getStopwords(filepath):
     with open(filepath, 'r', encoding='utf-8') as f:
         words = f.read()
         # print(type(words))  # str
-        print(words.split('\n'))
+        # print(words.split('\n'))
         return words.split('\n')
 
 # 加载模型
@@ -66,25 +67,27 @@ def getSenVec(parser_list, model):
 
 def cosDist(senVec1, senVec2):
     '''计算cos距离'''
-    cos = np.dot(senVec1.T, senVec2) / (np.linalg.norm(senVec1) * np.linalg.norm(senVec2))
+    cos = np.dot(senVec1, senVec2) / (np.linalg.norm(senVec1) * np.linalg.norm(senVec2))
     # normalized_sim = 0.5 + 0.5 * cos
-    print('------cosDist-------')
     # print(normalized_sim)
     # return normalized_sim
-    print(cos)
-    return cos
+    # print('------cosDist-------')    
+    # print(Decimal(cos))
+    return Decimal(cos)
 
 def euclideanDist(senVec1, senVec2):
     '''计算欧几里得距离'''
     euclidean = np.linalg.norm(senVec1 - senVec2)
-    print('------euclideanDist-------')
+    # print('------euclideanDist-------')
     # print(euclidean)
     normalized_sim = 1.0 / (euclidean + 1.0)
-    print(normalized_sim)
+    # print(normalized_sim)
+    return normalized_sim
 
 # 总函数
 def operation(model, test_sentence_1, test_sentence_2):
-    stopwords_file = './stopwords_words.txt'
+    # stopwords_file = './stopwords_words.txt'
+    stopwords_file = 'C:\\Wang Hanmo\\projects\\similarity\\company_similarity\\stopwords_words.txt'
     stopwords = getStopwords(stopwords_file)
 
     parser_list_1 = parserSen(test_sentence_1, stopwords)
@@ -93,9 +96,11 @@ def operation(model, test_sentence_1, test_sentence_2):
     parser_list_2 = parserSen(test_sentence_2, stopwords)
     senVec_2 = getSenVec(parser_list_2, model)
 
-    print('---------最终相似度-----------')
-    cosDist(senVec_1, senVec_2)
-    # euclideanDist(senVec_1, senVec_2)
+    # print('---------最终相似度-----------')
+    similarity = cosDist(senVec_1, senVec_2)
+    # similarity = euclideanDist(senVec_1, senVec_2)
+    # print(similarity)
+    return similarity
     
 
 if __name__ == '__main__':
@@ -130,7 +135,9 @@ if __name__ == '__main__':
     # # test_sentence_2 = '四川省百融金服有限公司'  # 0.09338489938119292  0.10301095735634219  0.014167722860191728
 
     # 第二组测试
-    # test_sentence_1 = '黑龙江红兴隆农垦民乐农业生产资料有限公司'
+    test_sentence_1 = '黑龙江红兴隆农垦民乐农业生产资料有限公司'
+    test_sentence_2 = '荆州市开蕊文化传媒有限公司'
+    # test_sentence_2 = '天津之海能源发展股份有限公司'
     # test_sentence_2 = '北京市红兴隆农垦民乐农业生产资料有限公司'  # 0.0
     # test_sentence_2 = '黑龙江红兴隆农垦民乐农业有限公司'  # 0.037899128553774  0.0
     # test_sentence_2 = '黑龙江红兴隆农垦民乐有限公司'  # 0.10465808393829548  0.15634690247603167  0.022769100045612813
@@ -140,9 +147,9 @@ if __name__ == '__main__':
     # test_sentence_2 = '黑龙江兴隆农垦民乐农业生产资料有限公司'
 
     # 第三组测试
-    test_sentence_1 = '蚌埠悠然酒店管理有限公司'
+    # test_sentence_1 = '蚌埠悠然酒店管理有限公司'
     # test_sentence_2 = '四川省蚌埠悠然酒店管理有限公司'
-    test_sentence_2 = '安徽省蚌埠华康悠然酒店管理公司'
+    # test_sentence_2 = '安徽省蚌埠华康悠然酒店管理公司'
     # test_sentence_2 = '安徽省蚌埠悠然酒店管理有限公司'  # 0.9777817058322253
     # test_sentence_2 = '安徽省蚌埠四凤悠然酒店管理有限公司'  # 0.011131538396269902
     # test_sentence_1 = '四川省'
@@ -157,11 +164,8 @@ if __name__ == '__main__':
     # test_sentence_1 = '蚌埠'
     # test_sentence_2 = '安徽省'
 
-
-
     # 加载模型
     w2v_model = loadModel(model_output)
-
     operation(w2v_model, test_sentence_1, test_sentence_2)
 
     # 分词
