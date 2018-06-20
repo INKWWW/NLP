@@ -77,13 +77,13 @@ def readLineFromGenerator(gener):
 
 # 使用这个函数进行建模
 def trigger():
-    dirname = os.getcwd()
+    # dirname = os.getcwd()
     # company_name_file = '\\company_name.txt
 
     # 加载公司名称文本
     company_name_file = '../company_name/dw_list_train.txt'
-    filepath = dirname +  company_name_file
-    sentences = GetSentences(filepath)
+    # filepath = dirname +  company_name_file
+    sentences = GetSentences(company_name_file)
     # readLineFromGenerator(sentences)
 
     stopwords_file = './stopwords_words.txt'
@@ -97,7 +97,7 @@ def trigger():
     # model_name = '\\word2vec_model.model'  # V1.0
     # model_name = '\\word2vec_model_10000V2.model'  # V2.0 -- 1W词
     # model_name = '\\word2vec_model_10000_skip.model'  # skip-gram model
-    model_name = '\\word2vec_model_10000_skip_stopwords.model'
+    model_name = '\\word2vec_model_skip_stopwords.model'
     model_output = dirname + model_name
     input_file = '\\parser_company_name.txt'
     file_input = dirname + input_file
