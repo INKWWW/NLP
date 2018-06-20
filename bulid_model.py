@@ -32,7 +32,7 @@ def getStopwords(filepath):
 def parserCompanyName(name_generator, stopwords):
     train_sen = []
     # 这个是新建的txt文件
-    with open('./parser_company_name_stopwords.txt', 'w') as f:
+    with open('./parser_company_name_10000V2_stopwords.txt', 'w') as f:
         for item in name_generator:
             parser_list = jieba.lcut(item[0])
             parser_list = [item for item in parser_list if item not in stopwords]
@@ -98,8 +98,8 @@ def trigger():
     # model_name = '\\word2vec_model_10000_skip.model'  # skip-gram model
     model_name = '\\word2vec_model_10000_skip_stopwords.model'
     model_output = dirname + model_name
-    # input_file = '\\parser_company_name.txt'
-    # file_input = dirname + input_file
+    input_file = '\\parser_company_name.txt'
+    file_input = dirname + input_file
     # with open(file_input, 'r') as f:
     #     fread = f.read()
     #     print(fread)  -- str

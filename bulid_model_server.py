@@ -97,9 +97,9 @@ def trigger():
     # model_name = '\\word2vec_model.model'  # V1.0
     # model_name = '\\word2vec_model_10000V2.model'  # V2.0 -- 1W词
     # model_name = '\\word2vec_model_10000_skip.model'  # skip-gram model
-    model_name = '\\word2vec_model_skip_stopwords.model'
-    model_output = dirname + model_name
-    input_file = '\\parser_company_name.txt'
+    model_name = './word2vec_model_skip_stopwords.model'
+    model_output = model_name
+    input_file = './parser_company_name.txt'
     file_input = dirname + input_file
     # with open(file_input, 'r') as f:
     #     fread = f.read()
