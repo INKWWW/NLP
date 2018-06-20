@@ -6,7 +6,7 @@ from decimal import Decimal
 
 # sys.path.append('C:\\Wang Hanmo\\projects\\similarity\\company_similarity')
 sys.path.append("..")
-print(sys.path)
+sys.path.append("/home/hanmo.wang/similarity/NLP/functions") # 把这个路径添加进去，防止找不到./stopwords_words.txt
 # pdb.set_trace()
 import run_model_server
 import preprocess_server
