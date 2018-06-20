@@ -64,7 +64,7 @@ def predict_strMatch(inputfile, outputfile, stopwords):
     input_name = []
     base_result = []
     predict_result = []
-    with open(inputfile, 'r') as f:
+    with open(inputfile, 'r', encoding='gbk') as f:
         fread = f.read()
         lines = fread.split()
         for line in lines:
