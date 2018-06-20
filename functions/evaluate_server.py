@@ -23,7 +23,7 @@ def predict_word2vec(filepath, model, resultpath, distance_model):
     input_name = []
     base_result = []
     predict_result = []
-    with open(filepath, 'r') as f:
+    with open(filepath, 'r', encoding='gbk') as f:
         fread = f.read()
         lines = fread.split()
         # for line in lines:
