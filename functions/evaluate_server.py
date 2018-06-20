@@ -157,9 +157,9 @@ def main_straight():
     evaluation(base_result, predict_result)
 
 if __name__ == '__main__':
-    # distance_model = 1
-    # main_w2v(distance_model)
-    main_straight()
+    distance_model = 1
+    main_w2v(distance_model)
+    # main_straight()
 
     # w2v_model = loadModel()
 
