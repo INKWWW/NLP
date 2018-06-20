@@ -107,8 +107,8 @@ if __name__ == '__main__':
     dirname = os.getcwd()
     # model_name = '\\word2vec_model.model'
     # model_name = '\\word2vec_model_10000.model'
-    # model_name = '\\word2vec_model_10000V2.model'
-    model_name = '\\word2vec_model_10000_skip.model'
+    model_name = '\\word2vec_model_10000V2.model'
+    # model_name = '\\word2vec_model_10000_skip.model'
     model_output = dirname + model_name
 
     # test_sentence_1 = '哈尔滨久久华康科技有限公司'

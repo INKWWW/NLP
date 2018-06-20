@@ -9,7 +9,7 @@ from pprint import pprint
 
 # print(os.getcwd())
 
-stopwords = ['（', '）', '(', ')', ' ', '、', '·']
+# stopwords = ['（', '）', '(', ')', ' ', '、', '·']
 
 class GetSentences(object):
     def __init__(self, filepath):
@@ -31,7 +31,7 @@ def getStopwords(filepath):
 # 分词作为模型训练输入
 def parserCompanyName(name_generator, stopwords):
     train_sen = []
-    with open('./parser_company_name_10000V2.txt', 'w') as f:
+    with open('./parser_company_name_10000V2_stopwords.txt', 'w') as f:
         for item in name_generator:
             parser_list = jieba.lcut(item[0])
             parser_list = [item for item in parser_list if item not in stopwords]
@@ -84,8 +84,8 @@ def trigger():
     sentences = GetSentences(filepath)
     # readLineFromGenerator(sentences)
 
-    # stopwords_file = './stopwords_words.txt'
-    # stopwords = getStopwords(stopwords_file)
+    stopwords_file = './stopwords_words.txt'
+    stopwords = getStopwords(stopwords_file)
 
     # 分词 - 作为训练模型的输入
     train_sen = parserCompanyName(sentences, stopwords)
@@ -94,7 +94,8 @@ def trigger():
     # 训练并保存模型
     # model_name = '\\word2vec_model.model'  # V1.0
     # model_name = '\\word2vec_model_10000V2.model'  # V2.0 -- 1W词
-    model_name = '\\word2vec_model_10000_skip.model'  # skip-gram model
+    # model_name = '\\word2vec_model_10000_skip.model'  # skip-gram model
+    model_name = '\\word2vec_model_10000_skip_stopwords.model'
     model_output = dirname + model_name
     input_file = '\\parser_company_name.txt'
     file_input = dirname + input_file
@@ -147,7 +148,6 @@ if __name__ == '__main__':
     VEC_SIZE = 200  # size - 特征向量维度
     CONTEXT_WINDOW = 2  # window - 上下文提取词的最大距离
     SG = 1  # 1 -> skip-gram; Otherwise, CBOW is used.
-
 
     # # 停词表
     # stopwords_file = './stopwords.txt'

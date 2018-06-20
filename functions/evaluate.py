@@ -11,9 +11,12 @@ print(sys.path)
 import run_model
 import preprocess
 
+
 def loadModel():
-    model_output = '../word2vec_model_10000_skip.model'
+    # model_output = '../word2vec_model_10000_skip.model'
+    model_output = '../word2vec_model_10000_skip_stopwords.model'    
     return run_model.loadModel(model_output)
+
 
 def predict_word2vec(filepath, model, resultpath):
     base_name = []
@@ -41,20 +44,15 @@ def predict_word2vec(filepath, model, resultpath):
             # print(similarity)
             # pdb.set_trace()
 
-            ##### 针对cos distance
-            # if similarity > 0.999:
-            #     predict_result.append('1')
-            # else:
-            #     predict_result.append('0')
-
-            ###### 针对euclidean Distance
-            if similarity > 0.99999:
+            ##### 针对euclidean Distance
+            if similarity > 0.999:
                 predict_result.append('1')
             else:
                 predict_result.append('0')
             content = test_sentence_1 + ',' + test_sentence_2 + ',' + base_result[i] + ',' + predict_result[i] + ',' + str(similarity) + '\n'
             fw.write(content)
     return base_result, predict_result
+
 
 def predict_strMatch(inputfile, outputfile, stopwords):
     base_name = []
@@ -95,7 +93,6 @@ def evaluation(base_result, predict_result):
     normal_pos, normal_neg, detected_pos, detected_neg
     '''
     tp, fn, tn, fp = 0, 0, 0, 0
-
     length = len(base_result)
     for i in range(0, length):
         if base_result[i] == '0' and predict_result[i] == '0':
@@ -106,37 +103,31 @@ def evaluation(base_result, predict_result):
             fn += 1
         else:
             fp += 1
-
     # precision
     precision = tp / (tp + fp)
     print('-------precision--------: {}'.format(precision))
-
     # recall
     recall = tp / (tp + fn)
     print('-------recall--------: {}'.format(recall))
-
     # F1-score
     f1_score = 2 * ((precision * recall) / (precision + recall))
     print('-------f1_score--------: {}'.format(f1_score))
-
     return (precision, recall, f1_score)
-
 
 if __name__ == '__main__':
 
     w2v_model = loadModel()
 
     # 测试word2vec
-    filepath = './test2.txt'
-    resultpath = './result2.txt'
+    filepath = './test1.txt'
+    resultpath = './result1.txt'
     base_result, predict_result = predict_word2vec(filepath, w2v_model, resultpath)
     evaluation(base_result, predict_result)
 
     # # 测试直接匹配
     # filepath = '../stopwords_words.txt'
     # stopwords = preprocess.getStopwords(filepath)
-    # inputfile = './test1.txt'
-    # outputfile = './result_str1.txt'
+    # inputfile = './test2.txt'
+    # outputfile = './result_str2.txt'
     # base_result, predict_result = predict_strMatch(inputfile, outputfile, stopwords)
     # evaluation(base_result, predict_result)
-
