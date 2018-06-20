@@ -99,12 +99,14 @@ def trigger():
     # model_name = '\\word2vec_model_10000_skip.model'  # skip-gram model
     model_name = './word2vec_model_skip_stopwords.model'
     model_output = model_name
-    input_file = './parser_company_name.txt'
-    file_input = dirname + input_file
+    # input_file = './parser_company_name.txt'
+    # file_input = dirname + input_file
     # with open(file_input, 'r') as f:
     #     fread = f.read()
     #     print(fread)  -- str
+    print('Training...')
     trainModel(train_sen, model_output)
+    print('Successfully')
     # # 加载模型
     # w2v_model = loadModel(model_output)
     # # 测试模型
