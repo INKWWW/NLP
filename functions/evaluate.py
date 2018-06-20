@@ -50,7 +50,7 @@ def predict_word2vec(filepath, model, resultpath, distance_model):
             # pdb.set_trace()
 
             ##### 针对euclidean Distance
-            if similarity > 0.99:
+            if similarity > 0.995:
                 predict_result.append('1')
             else:
                 predict_result.append('0')
@@ -157,9 +157,9 @@ def main_straight():
     evaluation(base_result, predict_result)
 
 if __name__ == '__main__':
-    distance_model = 2
-    main_w2v(distance_model)
-    # main_straight()
+    # distance_model = 1
+    # main_w2v(distance_model)
+    main_straight()
 
     # w2v_model = loadModel()
 

@@ -60,7 +60,6 @@ def generate_txt(csv_file, output_file):
                 fw.write(new_row)
 
 
-
 if __name__ == '__main__':
     filepath = './公司名称提取0619.xlsx'
     handleXlsx(filepath)

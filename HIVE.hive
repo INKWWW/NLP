@@ -13,6 +13,7 @@ SELECT COUNT(DISTINCT dw_name) FROM dw_list;
 17529218
 
 # 服务器中运行，不在Hive中
+# 将数据表保存到txt文件中
 hive -e "SELECT * FROM hanmo.dw_list_train" > /home/hanmo.wang/dw_list_train.txt
 
 
