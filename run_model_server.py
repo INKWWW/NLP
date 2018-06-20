@@ -10,6 +10,7 @@ import numpy as np
 from decimal import Decimal
 
 
+
 # 加载停词
 def getStopwords(filepath):
     '''训练模型的时候不用加载停词文件表，直接使用只去除标点符号的停词'''
@@ -91,7 +92,7 @@ def euclideanDist(senVec1, senVec2):
 # 总函数
 def operation(model, test_sentence_1, test_sentence_2, distance_model):
     # stopwords_file = './stopwords_words.txt'
-    stopwords_file = './stopwords_words.txt'
+    stopwords_file = '/home/hanmo.wang/similarity/NLP/stopwords_words.txt'
     stopwords = getStopwords(stopwords_file)
 
     parser_list_1 = parserSen(test_sentence_1, stopwords)
