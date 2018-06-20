@@ -52,9 +52,13 @@ def getSenVec(parser_list, model):
     for test_word in parser_list:
         try:
             wordVec_new = findWordVec(model, test_word)
-            temp = np.vstack((wordVec_new, temp))
+            # temp = np.vstack((wordVec_new, temp))
         except KeyError as e:
-            wordVec_new = np.zeros((100,))
+            # print(test_word)
+            wordVec_new = np.ones([200,])
+            wordVec_new = wordVec_new*0.0001
+        temp = np.vstack((wordVec_new, temp))
+
     # print(temp)
     # print(wordVec_new)
     # 所有词向量加起来，除以词数得到句向量
@@ -73,7 +77,7 @@ def cosDist(senVec1, senVec2):
     # return normalized_sim
     # print('------cosDist-------')    
     # print(Decimal(cos))
-    return Decimal(cos)
+    return cos
 
 def euclideanDist(senVec1, senVec2):
     '''计算欧几里得距离'''
@@ -92,13 +96,18 @@ def operation(model, test_sentence_1, test_sentence_2):
 
     parser_list_1 = parserSen(test_sentence_1, stopwords)
     senVec_1 = getSenVec(parser_list_1, model)
+    # print('-----------senVec_1-----------')
+    # print(senVec_1)
 
     parser_list_2 = parserSen(test_sentence_2, stopwords)
     senVec_2 = getSenVec(parser_list_2, model)
+    # print('-----------senVec2-----------')
+    # print(senVec_2)
 
     # print('---------最终相似度-----------')
-    similarity = cosDist(senVec_1, senVec_2)
-    # similarity = euclideanDist(senVec_1, senVec_2)
+    # similarity = cosDist(senVec_1, senVec_2)
+    similarity = euclideanDist(senVec_1, senVec_2)
+    # print('------------similarity----------')
     # print(similarity)
     return similarity
     
@@ -107,7 +116,7 @@ if __name__ == '__main__':
     dirname = os.getcwd()
     # model_name = '\\word2vec_model.model'
     # model_name = '\\word2vec_model_10000.model'
-    model_name = '\\word2vec_model_10000V2.model'
+    model_name = '\\word2vec_model_10000_skip_stopwords.model'
     # model_name = '\\word2vec_model_10000_skip.model'
     model_output = dirname + model_name
 
@@ -135,8 +144,8 @@ if __name__ == '__main__':
     # # test_sentence_2 = '四川省百融金服有限公司'  # 0.09338489938119292  0.10301095735634219  0.014167722860191728
 
     # 第二组测试
-    test_sentence_1 = '黑龙江红兴隆农垦民乐农业生产资料有限公司'
-    test_sentence_2 = '荆州市开蕊文化传媒有限公司'
+    test_sentence_1 = '中兴通讯'
+    test_sentence_2 = '西安中兴新软件有限责任公司'
     # test_sentence_2 = '天津之海能源发展股份有限公司'
     # test_sentence_2 = '北京市红兴隆农垦民乐农业生产资料有限公司'  # 0.0
     # test_sentence_2 = '黑龙江红兴隆农垦民乐农业有限公司'  # 0.037899128553774  0.0

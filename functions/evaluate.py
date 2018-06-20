@@ -26,11 +26,16 @@ def predict_word2vec(filepath, model, resultpath):
     with open(filepath, 'r') as f:
         fread = f.read()
         lines = fread.split()
+        # for line in lines:
+        #     line_split = line.split(',')
+        #     base_name.append(line_split[0])
+        #     input_name.append(line_split[1])
+        #     base_result.append(line_split[2])
         for line in lines:
             line_split = line.split(',')
-            base_name.append(line_split[0])
-            input_name.append(line_split[1])
-            base_result.append(line_split[2])       
+            base_name.append(line_split[1])
+            input_name.append(line_split[0])
+            base_result.append(line_split[2])      
             
     length = len(input_name)
 
@@ -45,7 +50,7 @@ def predict_word2vec(filepath, model, resultpath):
             # pdb.set_trace()
 
             ##### 针对euclidean Distance
-            if similarity > 0.999:
+            if similarity > 0.99:
                 predict_result.append('1')
             else:
                 predict_result.append('0')
@@ -92,6 +97,14 @@ def evaluation(base_result, predict_result):
     '''计算precision、recall、F1
     normal_pos, normal_neg, detected_pos, detected_neg
     '''
+    all_num = len(base_result)
+    acc = 0
+    for j in range(0, all_num):
+        if base_result[j] == predict_result[j]:
+            acc += 1
+    accuracy = acc / all_num
+    print('-------accuracy--------: {}'.format(accuracy))
+
     tp, fn, tn, fp = 0, 0, 0, 0
     length = len(base_result)
     for i in range(0, length):
@@ -114,15 +127,40 @@ def evaluation(base_result, predict_result):
     print('-------f1_score--------: {}'.format(f1_score))
     return (precision, recall, f1_score)
 
-if __name__ == '__main__':
 
-    w2v_model = loadModel()
-
+def main_w2v():
+    '''main function for word2vec model    
+    '''
     # 测试word2vec
-    filepath = './test1.txt'
-    resultpath = './result1.txt'
+    w2v_model = loadModel()
+    filepath = '../company_name_test.txt'
+    resultpath = './test_result_w2c.txt'
     base_result, predict_result = predict_word2vec(filepath, w2v_model, resultpath)
     evaluation(base_result, predict_result)
+
+
+def main_straight():
+    '''main function for straight matching
+    '''
+    # 测试直接匹配
+    filepath = '../stopwords_words.txt'
+    stopwords = preprocess.getStopwords(filepath)
+    inputfile = '../company_name_test.txt'
+    outputfile = './test_result_match.txt'
+    base_result, predict_result = predict_strMatch(inputfile, outputfile, stopwords)
+    evaluation(base_result, predict_result)
+
+if __name__ == '__main__':
+    # main_w2v()
+    main_straight()
+
+    # w2v_model = loadModel()
+
+    # # 测试word2vec
+    # filepath = './test1.txt'
+    # resultpath = './result1.txt'
+    # base_result, predict_result = predict_word2vec(filepath, w2v_model, resultpath)
+    # evaluation(base_result, predict_result)
 
     # # 测试直接匹配
     # filepath = '../stopwords_words.txt'
