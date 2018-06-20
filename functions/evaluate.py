@@ -18,7 +18,7 @@ def loadModel():
     return run_model.loadModel(model_output)
 
 
-def predict_word2vec(filepath, model, resultpath):
+def predict_word2vec(filepath, model, resultpath, distance_model):
     base_name = []
     input_name = []
     base_result = []
@@ -44,7 +44,7 @@ def predict_word2vec(filepath, model, resultpath):
             test_sentence_1 = base_name[i]
             test_sentence_2 = input_name[i]
             # print('@@@: {},{}'.format(test_sentence_1, test_sentence_2))
-            similarity = run_model.operation(model, test_sentence_1, test_sentence_2)
+            similarity = run_model.operation(model, test_sentence_1, test_sentence_2, distance_model)
             # similarity = Decimal(similarity)
             # print(similarity)
             # pdb.set_trace()
@@ -134,11 +134,14 @@ def main_w2v(distance_model):
     :distance_mdoel -> 1:cos ;  2:euclidean
     '''
     # 测试word2vec
-    distance_model = 1
     w2v_model = loadModel()
     filepath = '../company_name_test.txt'
     resultpath = './test_result_w2c.txt'
     base_result, predict_result = predict_word2vec(filepath, w2v_model, resultpath, distance_model)
+    if distance_model == 1:
+        print('-----cos distance-----')
+    else:
+        print('-----euclidean distance-----')
     evaluation(base_result, predict_result)
 
 
@@ -154,7 +157,8 @@ def main_straight():
     evaluation(base_result, predict_result)
 
 if __name__ == '__main__':
-    main_w2v()
+    distance_model = 2
+    main_w2v(distance_model)
     # main_straight()
 
     # w2v_model = loadModel()
