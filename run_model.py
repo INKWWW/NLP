@@ -89,7 +89,7 @@ def euclideanDist(senVec1, senVec2):
     return normalized_sim
 
 # 总函数
-def operation(model, test_sentence_1, test_sentence_2):
+def operation(model, test_sentence_1, test_sentence_2, distance_model):
     # stopwords_file = './stopwords_words.txt'
     stopwords_file = 'C:\\Wang Hanmo\\projects\\similarity\\company_similarity\\stopwords_words.txt'
     stopwords = getStopwords(stopwords_file)
@@ -105,8 +105,10 @@ def operation(model, test_sentence_1, test_sentence_2):
     # print(senVec_2)
 
     # print('---------最终相似度-----------')
-    # similarity = cosDist(senVec_1, senVec_2)
-    similarity = euclideanDist(senVec_1, senVec_2)
+    if distance_model == 1:
+        similarity = cosDist(senVec_1, senVec_2)
+    if distance_model == 2:
+        similarity = euclideanDist(senVec_1, senVec_2)
     # print('------------similarity----------')
     # print(similarity)
     return similarity

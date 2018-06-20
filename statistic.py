@@ -42,6 +42,8 @@ def handleXlsx(filepath):
     print('precision: {}'.format(precision))
     recall = tp / (positive_in_groundtruth)
     print('recall: {}'.format(recall))
+    f1_score = 2 * ((precision * recall) / (precision + recall))
+    print('f1_score: {}'.format(f1_score))
 
     return df
 

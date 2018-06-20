@@ -128,14 +128,17 @@ def evaluation(base_result, predict_result):
     return (precision, recall, f1_score)
 
 
-def main_w2v():
-    '''main function for word2vec model    
+def main_w2v(distance_model):
+    '''main function for word2vec model
+
+    :distance_mdoel -> 1:cos ;  2:euclidean
     '''
     # 测试word2vec
+    distance_model = 1
     w2v_model = loadModel()
     filepath = '../company_name_test.txt'
     resultpath = './test_result_w2c.txt'
-    base_result, predict_result = predict_word2vec(filepath, w2v_model, resultpath)
+    base_result, predict_result = predict_word2vec(filepath, w2v_model, resultpath, distance_model)
     evaluation(base_result, predict_result)
 
 
@@ -151,8 +154,8 @@ def main_straight():
     evaluation(base_result, predict_result)
 
 if __name__ == '__main__':
-    # main_w2v()
-    main_straight()
+    main_w2v()
+    # main_straight()
 
     # w2v_model = loadModel()
 
