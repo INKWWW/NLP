@@ -65,8 +65,9 @@ def getSenVec(parser_list, model):
     # 所有词向量加起来，除以词数得到句向量
     temp_sum = temp.sum(axis=0)
     senVec = temp_sum / num_word
-    # print('--------senVec--------')
-    # print(senVec)
+    sentence = ''.join(parser_list)
+    print('--------senVec {}--------'.format(sentence))
+    print(senVec)
     # print(type(senVec))
     return senVec
 
@@ -83,10 +84,10 @@ def cosDist(senVec1, senVec2):
 def euclideanDist(senVec1, senVec2):
     '''计算欧几里得距离'''
     euclidean = np.linalg.norm(senVec1 - senVec2)
-    # print('------euclideanDist-------')
+    print('------euclideanDist-------')
     # print(euclidean)
     normalized_sim = 1.0 / (euclidean + 1.0)
-    # print(normalized_sim)
+    print(normalized_sim)
     return normalized_sim
 
 # 总函数
