@@ -15,7 +15,8 @@ import preprocess_server
 
 def loadModel():
     # model_output = '../word2vec_model_10000_skip.model'
-    model_output = '../word2vec_model_skip_stopwords_win3.model'    
+    # model_output = '../word2vec_model_skip_stopwords_win3.model'    
+    model_output = '../word2vec_model_skip_stopwords_fasttext_win3.model'
     return run_model_server.loadModel(model_output)
 
 
@@ -180,7 +181,7 @@ def main_w2v(distance_model):
     # 测试word2vec
     w2v_model = loadModel()
     filepath = '../company_name_test.txt'
-    resultpath = './test_result_w2c.txt'
+    resultpath = './test_result_w2c_fasettext.txt'
     base_result, predict_result = predict_word2vec(filepath, w2v_model, resultpath, distance_model)
     if distance_model == 1:
         print('-----cos distance-----')

@@ -118,7 +118,8 @@ def operation(model, test_sentence_1, test_sentence_2, distance_model):
 
 if __name__ == '__main__':
 
-    model_output = './word2vec_model_skip_stopwords_win3.model'
+    # model_output = './word2vec_model_skip_stopwords_win3.model'
+    model_output = 'word2vec_model_skip_stopwords_fasttext_win3.model'
 
     test_sentence_1 = '北京'
     test_sentence_2 = '北京市'
