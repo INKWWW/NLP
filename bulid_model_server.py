@@ -55,13 +55,12 @@ def trainModel(train_sen, model_output):
     word2vec_model.save(model_output)
 
 # 训练模型
-def trainModel_fasttext(train_sen, model_output):         
+def trainModel_fasttext(train_sen, model_output):    
     # sentences = GetSentences(file_input)
     # yield sentences
     # sentences = list(sentences)
     word2vec_model = fasttext.FastText(train_sen, sg=SG, min_count = MIN_COUNT, workers = CPU_NUM, size = VEC_SIZE, window = CONTEXT_WINDOW)
     word2vec_model.save(model_output)
-
 
 # 加载模型
 def loadModel(model_path):
@@ -92,7 +91,6 @@ def trigger():
 
     # 加载公司名称文本
     company_name_file = '../company_name/dw_list_train.txt'
-    # filepath = dirname +  company_name_file
     sentences = GetSentences(company_name_file)
     # readLineFromGenerator(sentences)
 
@@ -104,24 +102,20 @@ def trigger():
     # print(train_sen)
 
     # 训练并保存模型
-    # model_name = '\\word2vec_model.model'  # V1.0
-    # model_name = '\\word2vec_model_10000V2.model'  # V2.0 -- 1W词
-    # model_name = '\\word2vec_model_10000_skip.model'  # skip-gram model
-    model_name = './word2vec_model_skip_stopwords_win3.model'
+    # word2vec model
+    # model_name = './word2vec_model_skip_stopwords_win3.model'
+    # model_output = model_name
+    # print('Training...')
+    # trainModel(train_sen, model_output)
+    # print('Successfully')
+
+    # fasttext mdoel
+    model_name = './word2vec_model_skip_stopwords_fasttext_win3.model'
     model_output = model_name
-    # input_file = './parser_company_name.txt'
-    # file_input = dirname + input_file
-    # with open(file_input, 'r') as f:
-    #     fread = f.read()
-    #     print(fread)  -- str
     print('Training...')
-    trainModel(train_sen, model_output)
+    trainModel_fasttext(train_sen, model_output)
     print('Successfully')
-    # # 加载模型
-    # w2v_model = loadModel(model_output)
-    # # 测试模型
-    # test_sentence = '哈尔滨久久康华科技有限责任公司'
-    # testModel(w2v_model, test_sentence)
+
 
 def countWordFre(filepath):
     '''计算词频并找到Top N高频词'''
@@ -152,12 +146,12 @@ if __name__ == '__main__':
 
     # 训练常量设置
 
-    # # window = 2
-    # MIN_COUNT = 0  # 忽略词频小于MIN_COUNT的  
-    # CPU_NUM = 3  # CPU核心数
-    # VEC_SIZE = 200  # size - 特征向量维度
-    # CONTEXT_WINDOW = 2  # window - 上下文提取词的最大距离
-    # SG = 1  # 1 -> skip-gram; Otherwise, CBOW is used.
+    # window = 2
+    MIN_COUNT = 0  # 忽略词频小于MIN_COUNT的  
+    CPU_NUM = 3  # CPU核心数
+    VEC_SIZE = 200  # size - 特征向量维度
+    CONTEXT_WINDOW = 2  # window - 上下文提取词的最大距离
+    SG = 1  # 1 -> skip-gram; Otherwise, CBOW is used.
 
     # # window = 1
     # MIN_COUNT = 0  # 忽略词频小于MIN_COUNT的  
@@ -166,12 +160,12 @@ if __name__ == '__main__':
     # CONTEXT_WINDOW = 1  # window - 上下文提取词的最大距离
     # SG = 1  # 1 -> skip-gram; Otherwise, CBOW is used.
 
-    # window = 3
-    MIN_COUNT = 0  # 忽略词频小于MIN_COUNT的  
-    CPU_NUM = 4  # CPU核心数
-    VEC_SIZE = 200  # size - 特征向量维度
-    CONTEXT_WINDOW = 3  # window - 上下文提取词的最大距离
-    SG = 1  # 1 -> skip-gram; Otherwise, CBOW is used.
+    # # window = 3
+    # MIN_COUNT = 0  # 忽略词频小于MIN_COUNT的  
+    # CPU_NUM = 4  # CPU核心数
+    # VEC_SIZE = 200  # size - 特征向量维度
+    # CONTEXT_WINDOW = 3  # window - 上下文提取词的最大距离
+    # SG = 1  # 1 -> skip-gram; Otherwise, CBOW is used.
 
     # # 停词表
     # stopwords_file = './stopwords.txt'
