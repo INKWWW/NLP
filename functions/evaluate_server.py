@@ -126,7 +126,7 @@ def evaluation(base_result, predict_result):
 #######################################################################################
 # 整合算法
 
-def predict_agg(inputfile, outputfile, stopwords):
+def predict_agg(inputfile, outputfile, stopwords, model):
     '''首先直接匹配，不行的话使用word2vec再进行计算'''
     base_name = []
     input_name = []
@@ -202,11 +202,12 @@ def main_straight():
 
 
 def main_agg():
+    w2v_model = loadModel()
     filepath = '../stopwords_words.txt'
     stopwords = preprocess_server.getStopwords(filepath)
     inputfile = '../company_name_test.txt'
     outputfile = './test_result_agg.txt'
-    base_result, predict_result = predict_agg(inputfile, outputfile, stopwords)
+    base_result, predict_result = predict_agg(inputfile, outputfile, stopwords, w2v_model)
     evaluation(base_result, predict_result)
 
 
