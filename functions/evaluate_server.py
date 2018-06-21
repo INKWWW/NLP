@@ -128,6 +128,54 @@ def evaluation(base_result, predict_result):
     print('-------f1_score--------: {}'.format(f1_score))
     return (precision, recall, f1_score)
 
+#######################################################################################
+# 整合算法
+
+def predict_agg(inputfile, outputfile, stopwords):
+    '''首先直接匹配，不行的话使用word2vec再进行计算'''
+    base_name = []
+    input_name = []
+    base_result = []
+    predict_result = []
+    with open(inputfile, 'r', encoding='gbk') as f:
+        fread = f.read()
+        lines = fread.split()
+        for line in lines:
+            line_split = line.split(',')
+            base_name.append(line_split[0])
+            input_name.append(line_split[1])
+            base_result.append(line_split[2])      
+            
+    length = len(input_name)
+
+    with open(outputfile, 'w') as fw:
+        for i in range(0, length):
+            test_sentence_1 = base_name[i]
+            test_sentence_2 = input_name[i]
+
+            shorter_sen, longer_sen = preprocess_server.processSen(test_sentence_1, test_sentence_2, stopwords)
+            result = preprocess_server.compare(shorter_sen, longer_sen)
+
+            if result:
+                predict_result.append('1')
+                content = test_sentence_1 + ',' + test_sentence_2 + ',' + base_result[i] + ',' + predict_result[i] + ',' + str(result) + '\n'
+                fw.write(content)
+            else:
+                # 使用匹配模型判断不了，使用word2vec。默认使用distance_model = 2 -> 欧几里得距离
+                distance_model = 2
+                similarity = run_model_server.operation(model, test_sentence_1, test_sentence_2, distance_model)
+
+                ##### 针对euclidean Distance
+                if similarity > 0.45:
+                    predict_result.append('1')
+                else:
+                    predict_result.append('0')
+                content = test_sentence_1 + ',' + test_sentence_2 + ',' + base_result[i] + ',' + predict_result[i] + ',' + str(similarity) + '\n'
+                fw.write(content)
+
+    return base_result, predict_result    
+
+#######################################################################################
 
 def main_w2v(distance_model):
     '''main function for word2vec model
@@ -156,6 +204,16 @@ def main_straight():
     outputfile = './test_result_match.txt'
     base_result, predict_result = predict_strMatch(inputfile, outputfile, stopwords)
     evaluation(base_result, predict_result)
+
+
+def main_agg():
+    filepath = '../stopwords_words.txt'
+    stopwords = preprocess_server.getStopwords(filepath)
+    inputfile = '../company_name_test.txt'
+    outputfile = './test_result_agg.txt'
+    base_result, predict_result = predict_agg(inputfile, outputfile, stopwords)
+    evaluation(base_result, predict_result)
+
 
 if __name__ == '__main__':
     distance_model = 2  # distance_mdoel -> 1:cos ;  2:euclidean
