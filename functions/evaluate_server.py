@@ -15,7 +15,7 @@ import preprocess_server
 
 def loadModel():
     # model_output = '../word2vec_model_10000_skip.model'
-    model_output = '../word2vec_model_skip_stopwords_win1.model'    
+    model_output = '../word2vec_model_skip_stopwords_win3.model'    
     return run_model_server.loadModel(model_output)
 
 
@@ -46,7 +46,7 @@ def predict_word2vec(filepath, model, resultpath, distance_model):
             # pdb.set_trace()
 
             ##### 针对euclidean Distance
-            if similarity > 0.5:
+            if similarity > 0.45:
                 predict_result.append('1')
             else:
                 predict_result.append('0')
