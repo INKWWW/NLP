@@ -87,7 +87,7 @@ def euclideanDist(senVec1, senVec2):
     # print('------euclideanDist-------')
     # print(euclidean)
     normalized_sim = 1.0 / (euclidean + 1.0)
-    # print(normalized_sim)
+    print(normalized_sim)
     return normalized_sim
 
 # 总函数
