@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-'''进行直接匹配'''
+'''直接匹配算法'''
 
 import os
 import copy

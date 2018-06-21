@@ -158,7 +158,7 @@ def main_straight():
     evaluation(base_result, predict_result)
 
 if __name__ == '__main__':
-    distance_model = 1  # distance_mdoel -> 1:cos ;  2:euclidean
+    distance_model = 2  # distance_mdoel -> 1:cos ;  2:euclidean
     main_w2v(distance_model)
     # main_straight()
 
