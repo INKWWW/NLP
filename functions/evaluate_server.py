@@ -168,7 +168,7 @@ def predict_agg(inputfile, outputfile, stopwords, model):
                 content = test_sentence_1 + ',' + test_sentence_2 + ',' + base_result[i] + ',' + predict_result[i] + ',' + str(similarity) + '\n'
                 fw.write(content)
 
-    return base_result, predict_result    
+    return base_result, predict_result   
 
 #######################################################################################
 
@@ -212,9 +212,14 @@ def main_agg():
 
 
 if __name__ == '__main__':
+    # word2vec匹配
     # distance_model = 2  # distance_mdoel -> 1:cos ;  2:euclidean
     # main_w2v(distance_model)
+
+    # 直接匹配
     # main_straight()
+
+    # 组合方法
     main_agg()
 
     # w2v_model = loadModel()
