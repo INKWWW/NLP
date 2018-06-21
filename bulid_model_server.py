@@ -97,7 +97,7 @@ def trigger():
     # model_name = '\\word2vec_model.model'  # V1.0
     # model_name = '\\word2vec_model_10000V2.model'  # V2.0 -- 1W词
     # model_name = '\\word2vec_model_10000_skip.model'  # skip-gram model
-    model_name = './word2vec_model_skip_stopwords.model'
+    model_name = './word2vec_model_skip_stopwords_win0.model'
     model_output = model_name
     # input_file = './parser_company_name.txt'
     # file_input = dirname + input_file
@@ -141,16 +141,19 @@ def countWordFre(filepath):
 if __name__ == '__main__':
 
     # 训练常量设置
+
+    # # window = 2
     # MIN_COUNT = 0  # 忽略词频小于MIN_COUNT的  
     # CPU_NUM = 3  # CPU核心数
-    # VEC_SIZE = 100  # size - 特征向量维度
-    # CONTEXT_WINDOW = 1  # window - 上下文提取词的最大距离
+    # VEC_SIZE = 200  # size - 特征向量维度
+    # CONTEXT_WINDOW = 2  # window - 上下文提取词的最大距离
     # SG = 1  # 1 -> skip-gram; Otherwise, CBOW is used.
 
+    # window = 0
     MIN_COUNT = 0  # 忽略词频小于MIN_COUNT的  
     CPU_NUM = 3  # CPU核心数
     VEC_SIZE = 200  # size - 特征向量维度
-    CONTEXT_WINDOW = 2  # window - 上下文提取词的最大距离
+    CONTEXT_WINDOW = 0  # window - 上下文提取词的最大距离
     SG = 1  # 1 -> skip-gram; Otherwise, CBOW is used.
 
     # # 停词表
