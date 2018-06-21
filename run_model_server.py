@@ -87,7 +87,7 @@ def euclideanDist(senVec1, senVec2):
     # print('------euclideanDist-------')
     # print(euclidean)
     normalized_sim = 1.0 / (euclidean + 1.0)
-    print(normalized_sim)
+    # print(normalized_sim)
     return normalized_sim
 
 # 总函数
@@ -118,7 +118,7 @@ def operation(model, test_sentence_1, test_sentence_2, distance_model):
 
 if __name__ == '__main__':
 
-    model_output = './word2vec_model_skip_stopwords_win1.model'
+    model_output = './word2vec_model_skip_stopwords_win3.model'
 
     test_sentence_1 = '北京'
     test_sentence_2 = '北京市'

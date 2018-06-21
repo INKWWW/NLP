@@ -54,6 +54,15 @@ def trainModel(train_sen, model_output):
     word2vec_model = word2vec.Word2Vec(train_sen, sg=SG, min_count = MIN_COUNT, workers = CPU_NUM, size = VEC_SIZE, window = CONTEXT_WINDOW)
     word2vec_model.save(model_output)
 
+# 训练模型
+def trainModel_fasttext(train_sen, model_output):         
+    # sentences = GetSentences(file_input)
+    # yield sentences
+    # sentences = list(sentences)
+    word2vec_model = fasttext.FastText(train_sen, sg=SG, min_count = MIN_COUNT, workers = CPU_NUM, size = VEC_SIZE, window = CONTEXT_WINDOW)
+    word2vec_model.save(model_output)
+
+
 # 加载模型
 def loadModel(model_path):
     return word2vec.Word2Vec.load(model_path)
