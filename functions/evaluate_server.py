@@ -27,11 +27,6 @@ def predict_word2vec(filepath, model, resultpath, distance_model):
     with open(filepath, 'r', encoding='gbk') as f:
         fread = f.read()
         lines = fread.split()
-        # for line in lines:
-        #     line_split = line.split(',')
-        #     base_name.append(line_split[0])
-        #     input_name.append(line_split[1])
-        #     base_result.append(line_split[2])
         for line in lines:
             line_split = line.split(',')
             base_name.append(line_split[1])
@@ -70,8 +65,8 @@ def predict_strMatch(inputfile, outputfile, stopwords):
         lines = fread.split()
         for line in lines:
             line_split = line.split(',')
-            base_name.append(line_split[0])
-            input_name.append(line_split[1])
+            base_name.append(line_split[1])
+            input_name.append(line_split[0])
             base_result.append(line_split[2])       
             
     length = len(input_name)
@@ -142,8 +137,8 @@ def predict_agg(inputfile, outputfile, stopwords):
         lines = fread.split()
         for line in lines:
             line_split = line.split(',')
-            base_name.append(line_split[0])
-            input_name.append(line_split[1])
+            base_name.append(line_split[1])
+            input_name.append(line_split[0])
             base_result.append(line_split[2])      
             
     length = len(input_name)
@@ -216,9 +211,10 @@ def main_agg():
 
 
 if __name__ == '__main__':
-    distance_model = 2  # distance_mdoel -> 1:cos ;  2:euclidean
-    main_w2v(distance_model)
+    # distance_model = 2  # distance_mdoel -> 1:cos ;  2:euclidean
+    # main_w2v(distance_model)
     # main_straight()
+    main_agg()
 
     # w2v_model = loadModel()
 
