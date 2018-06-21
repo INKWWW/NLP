@@ -153,7 +153,7 @@ if __name__ == '__main__':
     MIN_COUNT = 0  # 忽略词频小于MIN_COUNT的  
     CPU_NUM = 3  # CPU核心数
     VEC_SIZE = 200  # size - 特征向量维度
-    CONTEXT_WINDOW = 0  # window - 上下文提取词的最大距离
+    CONTEXT_WINDOW = 1  # window - 上下文提取词的最大距离
     SG = 1  # 1 -> skip-gram; Otherwise, CBOW is used.
 
     # # 停词表
