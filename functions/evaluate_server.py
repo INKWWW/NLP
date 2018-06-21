@@ -14,7 +14,6 @@ import preprocess_server
 
 
 def loadModel():
-    # model_output = '../word2vec_model_10000_skip.model'
     # model_output = '../word2vec_model_skip_stopwords_win3.model'    
     # model_output = '../word2vec_model_skip_stopwords_fasttext_win3.model'
     model_output = '../word2vec_model_skip_stopwords.model'
@@ -163,7 +162,7 @@ def predict_agg(inputfile, outputfile, stopwords, model):
                 similarity = run_model_server.operation(model, test_sentence_1, test_sentence_2, distance_model)
 
                 ##### 针对euclidean Distance
-                if similarity > 0.5:
+                if similarity > 0.45:
                     predict_result.append('1')
                 else:
                     predict_result.append('0')
