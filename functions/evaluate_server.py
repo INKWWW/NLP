@@ -15,7 +15,7 @@ import preprocess_server
 
 def loadModel():
     # model_output = '../word2vec_model_10000_skip.model'
-    model_output = '../word2vec_model_skip_stopwords.model'    
+    model_output = '../word2vec_model_skip_stopwords_win1.model'    
     return run_model_server.loadModel(model_output)
 
 
@@ -212,15 +212,16 @@ def main_agg():
 
 
 if __name__ == '__main__':
+
     # word2vec匹配
-    # distance_model = 2  # distance_mdoel -> 1:cos ;  2:euclidean
-    # main_w2v(distance_model)
+    distance_model = 2  # distance_mdoel -> 1:cos ;  2:euclidean
+    main_w2v(distance_model)
 
     # 直接匹配
     # main_straight()
 
     # 组合方法
-    main_agg()
+    # main_agg()
 
     # w2v_model = loadModel()
 

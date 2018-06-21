@@ -4,6 +4,7 @@
 '''This script is run on server'''
 
 from gensim.models import word2vec
+from gensim.models import fasttext
 import jieba
 import pdb
 import os
