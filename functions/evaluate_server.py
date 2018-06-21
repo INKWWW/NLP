@@ -46,7 +46,7 @@ def predict_word2vec(filepath, model, resultpath, distance_model):
             # pdb.set_trace()
 
             ##### 针对euclidean Distance
-            if similarity > 0.45:
+            if similarity > 0.5:
                 predict_result.append('1')
             else:
                 predict_result.append('0')
