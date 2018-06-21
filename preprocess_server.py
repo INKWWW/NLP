@@ -54,8 +54,8 @@ def compare(shorter_sen, longer_sen):
         for item in shorter_sen_copy:
             for item_l in longer_sen_copy:
                 if item in item_l:
-                    indexs_s = [i for i, v in enumerate(shorter_sen_copy) if v==item]
-                    indexs_l = [i for i, v in enumerate(longer_sen_copy) if v==item_l]
+                    indexs_s = [i for i, v in enumerate(shorter_sen_copy) if v in item]
+                    indexs_l = [i for i, v in enumerate(longer_sen_copy) if v in item_l]
                     for index in indexs_s:
                         shorter_sen_copy.pop(index)
                     for index in indexs_l:
