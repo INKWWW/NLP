@@ -161,7 +161,7 @@ def predict_agg(inputfile, outputfile, stopwords, model):
                 similarity = run_model_server.operation(model, test_sentence_1, test_sentence_2, distance_model)
 
                 ##### 针对euclidean Distance
-                if similarity > 0.45:
+                if similarity > 0.5:
                     predict_result.append('1')
                 else:
                     predict_result.append('0')
