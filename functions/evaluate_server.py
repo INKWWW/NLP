@@ -268,4 +268,4 @@ if __name__ == '__main__':
     # main_agg()
 
     # gensim方法
-    main_gensim
+    main_gensim()
