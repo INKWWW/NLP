@@ -177,7 +177,7 @@ def predict_agg(inputfile, outputfile, stopwords, model):
 
 #######################################################################################
 ##### use methods belonging to gensim itself #####
-def predict_gensim(inputfile, model, resultpath, distance_model):
+def predict_gensim(inputfile, model, resultpath):
     base_name = []
     input_name = []
     base_result = []
@@ -244,14 +244,14 @@ def main_agg():
     stopwords = preprocess_server.getStopwords(filepath)
     inputfile = '../company_name_test.txt'
     outputfile = './test_result_agg.txt'
-    base_result, predict_result = predict_agg(inputfile, outputfile, stopwords, w2v_model)
+    base_result, predict_result = predict_agg(inputfile, w2v_model, outputfile)
     evaluation(base_result, predict_result)
 
 def main_gensim():
     w2v_model = loadModel()
     inputfile = '../company_name_test.txt'
     resultpath = './test_result_gensim.txt'
-    base_result, predict_result = predict_gensim(inputfile, w2v_model, resultpath, distance_model)
+    base_result, predict_result = predict_gensim(inputfile, w2v_model, resultpath)
     evaluation(base_result, predict_result)
 
 
