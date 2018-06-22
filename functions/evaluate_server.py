@@ -197,7 +197,7 @@ def predict_gensim(inputfile, model, resultpath):
         for i in range(0, length):
             test_sentence_1 = base_name[i]
             test_sentence_2 = input_name[i]
-            similarity = run_model_server.main(model, test_sentence_1, test_sentence_2)
+            similarity = run_model_server.main_gensim(model, test_sentence_1, test_sentence_2)
 
             if similarity > 0.8:
                 predict_result.append('1')

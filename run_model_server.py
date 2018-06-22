@@ -121,7 +121,9 @@ def operation(model, test_sentence_1, test_sentence_2, distance_model):
     # print(similarity)
     return similarity
 
-def main(model, stopwords, test_sentence_1, test_sentence_2):
+def main_gensim(model, test_sentence_1, test_sentence_2):
+    stopwords_file = '/home/hanmo.wang/similarity/NLP/stopwords_words.txt'
+    stopwords = getStopwords(stopwords_file)
 
     split_sen = jieba.lcut(test_sentence_1)
     split_sen_1 = [item for item in split_sen if item not in stopwords and item in model.wv.vocab]
