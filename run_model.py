@@ -119,14 +119,14 @@ def main(model_output, test_sentence_1, test_sentence_2):
 
     w2v_model = loadModel(model_output)
     split_sen = jieba.lcut(test_sentence_1)
-    split_sen_1 = [item for item in split_sen if item not in stopwords and item in w2v_model.wv.vocab]
+    split_sen_1 = [item for item in split_sen if (item not in stopwords) and (item in w2v_model.wv.vocab)]
     split_sen = jieba.lcut(test_sentence_2)
-    split_sen_2 = [item for item in split_sen if item not in stopwords and item in w2v_model.wv.vocab]
+    split_sen_2 = [item for item in split_sen if (item not in stopwords) and (item in w2v_model.wv.vocab)]
 
     similarity = w2v_model.wv.n_similarity(split_sen_1, split_sen_2)
     print(similarity)
     return similarity
-    
+
 
 if __name__ == '__main__':
     dirname = os.getcwd()
@@ -143,7 +143,7 @@ if __name__ == '__main__':
     # test_sentence_2 = '哈尔滨久久华康有限公司'  # cos：0.9999999999999998  .0  enclidean：0.10381817865051336  V2:0.1393186701868827
     # test_sentence_2 = '哈尔滨长久华康科技有限公司'  # cos：1.0  0.0  enclidean：0.0  V2:0.0
     # test_sentence_2 = '北京市百融金服科技有限公司'  # cos：0.9999839620230886  0.043129391793413574  enclidean：0.027304886398964206  V2:0.030312174677792212
-    test_sentence_2 = '北京市百融金服科技公司'  # cos：0.9999839620230886  0.043129391793413574  enclidean：0.027304886398964206  V2:0.11785001169482552
+    # test_sentence_2 = '北京市百融金服科技公司'  # cos：0.9999839620230886  0.043129391793413574  enclidean：0.027304886398964206  V2:0.11785001169482552
     # test_sentence_2 = '四川省百融金服科技有限公司'  # cos：  0.07568612905089231  enclidean：0.0520855644828885  V2:0.12377131385837323  0.02897386663929932
     # test_sentence_2 = '四川省百融金服有限公司'  # cos：  0.07568612905089231  enclidean：0.16771822181146087  V2:0.2934710911310562  0.1832938640796101
 
