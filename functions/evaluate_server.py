@@ -184,7 +184,7 @@ def predict_gensim(inputfile, model, resultpath):
     predict_result = []
     with open(inputfile, 'r', encoding='gbk') as f:
         fread = f.read()
-        lines = fread.split()
+        lines = fread.split('\n')
         for line in lines:
             print(line)
             line_split = line.split(',')
