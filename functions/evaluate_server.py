@@ -17,7 +17,7 @@ def loadModel():
     # model_output = '../word2vec_model_skip_stopwords_win3.model'    
     # model_output = '../word2vec_model_skip_stopwords_fasttext_win3.model'
     # model_output = '../word2vec_model_skip_stopwords.model'
-    model_output = './word2vec_model_cbow_stopwords_win1.model'
+    model_output = '../word2vec_model_cbow_stopwords_win1.model'
     return run_model_server.loadModel(model_output)
 
 
