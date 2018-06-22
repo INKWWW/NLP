@@ -182,7 +182,7 @@ def predict_gensim(inputfile, model, resultpath):
     input_name = []
     base_result = []
     predict_result = []
-    with open(filepath, 'r', encoding='gbk') as f:
+    with open(inputfile, 'r', encoding='gbk') as f:
         fread = f.read()
         lines = fread.split()
         for line in lines:
