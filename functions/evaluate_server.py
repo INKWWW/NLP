@@ -15,10 +15,10 @@ import preprocess_server
 
 def loadModel():
     # model_output = '../word2vec_model_skip_stopwords_win3.model'    
-    # model_output = '../word2vec_model_skip_stopwords_fasttext_win3.model'
-    # model_output = '../word2vec_model_skip_stopwords.model'
+    # model_output = '../word2vec_model_skip_stopwords_fasttext_win3.model'  # 其实是win2
+    model_output = '../word2vec_model_skip_stopwords.model'
     # model_output = '../word2vec_model_cbow_stopwords_win1.model'
-    model_output = '../word2vec_model_skip_stopwords_win1.model'
+    # model_output = '../word2vec_model_skip_stopwords_win1.model'
     return run_model_server.loadModel(model_output)
 
 
@@ -192,9 +192,9 @@ def predict_gensim(inputfile, model, resultpath):
         for line in lines:
             # print(line)
             line_split = line.split(',')
-            base_name.append(line_split[1])
-            input_name.append(line_split[0])
-            base_result.append(line_split[3]) # 1、0、-1
+            base_name.append(line_split[1])  # 根据三要素从公司库中提取的公司名称
+            input_name.append(line_split[0])  # 客户输入的公司名称
+            base_result.append(line_split[3]) # 1、0、-1 -- 人工标注答案 
             
     length = len(input_name)
 
@@ -251,6 +251,7 @@ def main_agg():
     outputfile = './test_result_agg.txt'
     base_result, predict_result = predict_agg(inputfile, w2v_model, outputfile)
     evaluation(base_result, predict_result)
+
 
 def main_gensim():
     w2v_model = loadModel()

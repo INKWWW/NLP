@@ -177,31 +177,3 @@ if __name__ == '__main__':
 
     # 建模
     trigger()
-
-    # dirname = os.getcwd()
-    # # company_name_file = '\\company_name.txt'
-    # company_name_file = '\\company_name_10000.txt'
-    # filepath = dirname +  company_name_file
-
-    # # 加载公司名称文本
-    # sentences = GetSentences(filepath)
-    # # readLineFromGenerator(sentences)
-    # # 分词 - 作为训练模型的输入
-    # train_sen = parserCompanyName(sentences)
-    # # print(train_sen)
-
-    # # 训练并保存模型
-    # # model_name = '\\word2vec_model.model'
-    # model_name = '\\word2vec_model_10000V2.model'
-    # model_output = dirname + model_name
-    # input_file = '\\parser_company_name.txt'
-    # file_input = dirname + input_file
-    # # with open(file_input, 'r') as f:
-    # #     fread = f.read()
-    # #     print(fread)  -- str
-    # trainModel(train_sen, model_output)
-    # # # 加载模型
-    # # w2v_model = loadModel(model_output)
-    # # # 测试模型
-    # # test_sentence = '哈尔滨久久康华科技有限责任公司'
-    # # testModel(w2v_model, test_sentence)
