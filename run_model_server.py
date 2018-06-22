@@ -122,17 +122,25 @@ def operation(model, test_sentence_1, test_sentence_2, distance_model):
     return similarity
 
 def main_gensim(model, test_sentence_1, test_sentence_2):
+    '''    
+    Arguments:
+        model {[type]} -- [description]
+        test_sentence_1 {[type]} -- 库中地址
+        test_sentence_2 {[type]} -- 用户输入地址
+    '''
     stopwords_file = '/home/hanmo.wang/similarity/NLP/stopwords_words.txt'
     stopwords = getStopwords(stopwords_file)
     print(test_sentence_1)
 
-    split_sen = jieba.lcut(test_sentence_1)
-    split_sen_1 = [item for item in split_sen if (item not in stopwords) and (item in model.wv.vocab)]
-    split_sen = jieba.lcut(test_sentence_2)
-    split_sen_2 = [item for item in split_sen if (item not in stopwords) and (item in model.wv.vocab)]
+    if test_sentence_1 == 'null' or len(test_sentence_2) > 50:
+        similarity = -1
+    else:
+        split_sen = jieba.lcut(test_sentence_1)
+        split_sen_1 = [item for item in split_sen if (item not in stopwords) and (item in model.wv.vocab)]
+        split_sen = jieba.lcut(test_sentence_2)
+        split_sen_2 = [item for item in split_sen if (item not in stopwords) and (item in model.wv.vocab)]
 
-    similarity = model.wv.n_similarity(split_sen_1, split_sen_2)
-    # print(similarity)
+        similarity = model.wv.n_similarity(split_sen_1, split_sen_2)
     return similarity
     
 

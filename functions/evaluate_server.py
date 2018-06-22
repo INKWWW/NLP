@@ -106,13 +106,13 @@ def evaluation(base_result, predict_result):
     tp, fn, tn, fp = 0, 0, 0, 0
     length = len(base_result)
     for i in range(0, length):
-        if base_result[i] == '0' and predict_result[i] == '0':
+        if (base_result[i] == '0' or base_result[i] == '-1') and predict_result[i] == '0':
             tn += 1
-        elif base_result[i] == '1' and predict_result[i] == '1':
+        if base_result[i] == '1' and predict_result[i] == '1':
             tp += 1
-        elif base_result[i] == '1' and predict_result[i] == '0':
+        if base_result[i] == '1' and predict_result[i] == '0':
             fn += 1
-        else:
+        if (base_result[i] == '0' or base_result[i] == '-1') and predict_result[i] == '1':
             fp += 1
     # precision
     precision = tp / (tp + fp)
@@ -249,7 +249,7 @@ def main_agg():
 
 def main_gensim():
     w2v_model = loadModel()
-    inputfile = '../company_name_test.txt'
+    inputfile = '../company_name_full_test.txt'
     resultpath = './test_result_gensim.txt'
     base_result, predict_result = predict_gensim(inputfile, w2v_model, resultpath)
     evaluation(base_result, predict_result)
