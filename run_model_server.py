@@ -130,7 +130,7 @@ def main_gensim(model, test_sentence_1, test_sentence_2):
     '''
     stopwords_file = '/home/hanmo.wang/similarity/NLP/stopwords_words.txt'
     stopwords = getStopwords(stopwords_file)
-    print(test_sentence_1)
+    # print(test_sentence_1)
 
     if test_sentence_1 == 'null' or len(test_sentence_2) > 50:
         similarity = -1
