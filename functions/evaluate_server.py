@@ -100,6 +100,8 @@ def evaluation(base_result, predict_result):
     for j in range(0, all_num):
         if base_result[j] == predict_result[j]:
             acc += 1
+        if base_result[j] == '-1' and predict_result[j] == '0':
+            acc += 1
     accuracy = acc / all_num
     print('-------accuracy--------: {}'.format(accuracy))
 
