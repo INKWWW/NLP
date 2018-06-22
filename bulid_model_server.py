@@ -110,7 +110,7 @@ def trigger():
     # print('Successfully')
 
     # fasttext mdoel
-    model_name = './word2vec_model_skip_stopwords_fasttext_win2.model'
+    model_name = './word2vec_model_skip_stopwords_fasttext_win3.model'
     model_output = model_name
     print('Training...')
     trainModel_fasttext(train_sen, model_output)
@@ -153,7 +153,6 @@ if __name__ == '__main__':
     CONTEXT_WINDOW = 2  # window - 上下文提取词的最大距离
     SG = 1  # 1 -> skip-gram; Otherwise, CBOW is used.
 
-    # # window = 1
     # MIN_COUNT = 0  # 忽略词频小于MIN_COUNT的  
     # CPU_NUM = 4  # CPU核心数
     # VEC_SIZE = 200  # size - 特征向量维度

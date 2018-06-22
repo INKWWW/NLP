@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# fasttext版本
+# fasttext版本，没有去除停词的训练！
 
 from gensim.models import fasttext
 import jieba

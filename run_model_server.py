@@ -10,7 +10,6 @@ import numpy as np
 from decimal import Decimal
 
 
-
 # 加载停词
 def getStopwords(filepath):
     '''训练模型的时候不用加载停词文件表，直接使用只去除标点符号的停词'''
@@ -20,9 +19,11 @@ def getStopwords(filepath):
         # print(words.split('\n'))
         return words.split('\n')
 
+
 # 加载模型
 def loadModel(model_path):
     return word2vec.Word2Vec.load(model_path)
+
 
 # 测试模型
 def findWordVec(model, test_word):
@@ -39,11 +40,13 @@ def findWordVec(model, test_word):
     # print(wordVec.ndim)
     return wordVec
 
+
 def parserSen(test_sentence, stopwords):
     '''分词'''
     parser_list = jieba.lcut(test_sentence)
     parser_list = [item for item in parser_list if item not in stopwords]
     return parser_list
+
 
 def getSenVec(parser_list, model):
     '''由词得到句向量'''
@@ -71,6 +74,7 @@ def getSenVec(parser_list, model):
     # print(type(senVec))
     return senVec
 
+
 def cosDist(senVec1, senVec2):
     '''计算cos距离'''
     cos = np.dot(senVec1, senVec2) / (np.linalg.norm(senVec1) * np.linalg.norm(senVec2))
@@ -81,14 +85,16 @@ def cosDist(senVec1, senVec2):
     # print(Decimal(cos))
     return cos
 
+
 def euclideanDist(senVec1, senVec2):
     '''计算欧几里得距离'''
     euclidean = np.linalg.norm(senVec1 - senVec2)
     # print('------euclideanDist-------')
     # print(euclidean)
     normalized_sim = 1.0 / (euclidean + 1.0)
-    print(normalized_sim)
+    # print(normalized_sim)
     return normalized_sim
+
 
 # 总函数
 def operation(model, test_sentence_1, test_sentence_2, distance_model):
@@ -114,17 +120,29 @@ def operation(model, test_sentence_1, test_sentence_2, distance_model):
     # print('------------similarity----------')
     # print(similarity)
     return similarity
+
+def main(model, stopwords, test_sentence_1, test_sentence_2):
+
+    split_sen = jieba.lcut(test_sentence_1)
+    split_sen_1 = [item for item in split_sen if item not in stopwords and item in model.wv.vocab]
+    split_sen = jieba.lcut(test_sentence_2)
+    split_sen_2 = [item for item in split_sen if item not in stopwords and item in model.wv.vocab]
+
+    similarity = model.wv.n_similarity(split_sen_1, split_sen_2)
+    # print(similarity)
+    return similarity
     
 
 if __name__ == '__main__':
 
-    # model_output = './word2vec_model_skip_stopwords_win3.model'
-    model_output = 'word2vec_model_skip_stopwords_fasttext_win3.model'
+    model_output = './word2vec_model_skip_stopwords_win.model'
+    # model_output = 'word2vec_model_skip_stopwords_fasttext_win3.model'
 
     test_sentence_1 = '北京'
     test_sentence_2 = '北京市'
     
     # 加载模型
     w2v_model = loadModel(model_output)
-    distance_model = 2
-    operation(w2v_model, test_sentence_1, test_sentence_2, distance_model)
+    # distance_model = 2
+    # operation(w2v_model, test_sentence_1, test_sentence_2, distance_model)
+    main()

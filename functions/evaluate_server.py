@@ -42,6 +42,7 @@ def predict_word2vec(filepath, model, resultpath, distance_model):
             test_sentence_2 = input_name[i]
             # print('@@@: {},{}'.format(test_sentence_1, test_sentence_2))
             similarity = run_model_server.operation(model, test_sentence_1, test_sentence_2, distance_model)
+            # similarity = run_model_server.main(model_output, test_sentence_1, test_sentence_2)
             # similarity = Decimal(similarity)
             # print(similarity)
             # pdb.set_trace()
@@ -173,6 +174,41 @@ def predict_agg(inputfile, outputfile, stopwords, model):
 
 #######################################################################################
 
+
+#######################################################################################
+##### use methods belonging to gensim itself #####
+def predict_gensim(inputfile, model, resultpath, distance_model):
+    base_name = []
+    input_name = []
+    base_result = []
+    predict_result = []
+    with open(filepath, 'r', encoding='gbk') as f:
+        fread = f.read()
+        lines = fread.split()
+        for line in lines:
+            line_split = line.split(',')
+            base_name.append(line_split[1])
+            input_name.append(line_split[0])
+            base_result.append(line_split[2])      
+            
+    length = len(input_name)
+
+    with open(resultpath, 'w') as fw:
+        for i in range(0, length):
+            test_sentence_1 = base_name[i]
+            test_sentence_2 = input_name[i]
+            similarity = run_model_server.main(model, test_sentence_1, test_sentence_2)
+
+            if similarity > 0.8:
+                predict_result.append('1')
+            else:
+                predict_result.append('0')
+            content = test_sentence_1 + ',' + test_sentence_2 + ',' + base_result[i] + ',' + predict_result[i] + ',' + str(similarity) + '\n'
+            fw.write(content)
+    return base_result, predict_result
+#######################################################################################
+
+
 def main_w2v(distance_model):
     '''main function for word2vec model
 
@@ -211,6 +247,13 @@ def main_agg():
     base_result, predict_result = predict_agg(inputfile, outputfile, stopwords, w2v_model)
     evaluation(base_result, predict_result)
 
+def main_gensim():
+    w2v_model = loadModel()
+    inputfile = '../company_name_test.txt'
+    resultpath = './test_result_gensim.txt'
+    base_result, predict_result = predict_gensim(inputfile, w2v_model, resultpath, distance_model)
+    evaluation(base_result, predict_result)
+
 
 if __name__ == '__main__':
 
@@ -222,20 +265,7 @@ if __name__ == '__main__':
     # main_straight()
 
     # 组合方法
-    main_agg()
+    # main_agg()
 
-    # w2v_model = loadModel()
-
-    # # 测试word2vec
-    # filepath = './test1.txt'
-    # resultpath = './result1.txt'
-    # base_result, predict_result = predict_word2vec(filepath, w2v_model, resultpath)
-    # evaluation(base_result, predict_result)
-
-    # # 测试直接匹配
-    # filepath = '../stopwords_words.txt'
-    # stopwords = preprocess_server.getStopwords(filepath)
-    # inputfile = './test2.txt'
-    # outputfile = './result_str2.txt'
-    # base_result, predict_result = predict_strMatch(inputfile, outputfile, stopwords)
-    # evaluation(base_result, predict_result)
+    # gensim方法
+    main_gensim
