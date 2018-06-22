@@ -186,7 +186,7 @@ def predict_gensim(inputfile, model, resultpath):
         fread = f.read()
         lines = fread.split('\n')
         for line in lines:
-            print(line)
+            # print(line)
             line_split = line.split(',')
             base_name.append(line_split[1])
             input_name.append(line_split[0])
