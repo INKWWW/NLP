@@ -192,7 +192,7 @@ def predict_gensim(inputfile, model, resultpath):
             line_split = line.split(',')
             base_name.append(line_split[1])
             input_name.append(line_split[0])
-            base_result.append(line_split[2]) # 1、0、-1  
+            base_result.append(line_split[3]) # 1、0、-1
             
     length = len(input_name)
 
@@ -252,7 +252,8 @@ def main_agg():
 
 def main_gensim():
     w2v_model = loadModel()
-    inputfile = '../company_name_full_test.txt'
+    # inputfile = '../company_name_full_test.txt'
+    inputfile = '../company_name_full_calculate.txt'
     resultpath = './test_result_gensim.txt'
     base_result, predict_result = predict_gensim(inputfile, w2v_model, resultpath)
     evaluation(base_result, predict_result)
