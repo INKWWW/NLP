@@ -21,7 +21,7 @@ class GetSentences(object):
     # 避免全部加载到内存
     def __iter__(self):
         for line in open(self.filepath, 'r'):
-            yield line.split()  # 按照空格区分
+            yield line.split('\n')  # 按照空格区分
 
 def getStopwords(filepath):
     '''训练模型的时候不用加载停词文件表，直接使用只去除标点符号的停词'''
