@@ -175,5 +175,9 @@ if __name__ == '__main__':
     # filepath = 'parser_company_name_10000V2.txt'
     # countWordFre(filepath)
 
+    start_time = time.clock()
     # 建模
     trigger()
+    end_time = time.clock()
+    run_time = start_time - end_time
+    print(run_time)
