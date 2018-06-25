@@ -165,11 +165,12 @@ def predict_agg(inputfile, outputfile, stopwords, model):
                 fw.write(content)
             else:
                 # 使用匹配模型判断不了，使用word2vec。默认使用distance_model = 2 -> 欧几里得距离
-                distance_model = 2
-                similarity = run_model_server.operation(model, test_sentence_1, test_sentence_2, distance_model)
+                # distance_model = 2
+                # similarity = run_model_server.opertation(model, test_sentence_1, test_sentence_2, distance_model)
+                similarity = run_model_server.main_gensim(model, test_sentence_1, test_sentence_2)
 
                 ##### 针对euclidean Distance
-                if similarity > 0.45:
+                if similarity > 0.95:
                     predict_result.append('1')
                 else:
                     predict_result.append('0')
@@ -247,9 +248,9 @@ def main_straight():
 
 def main_agg():
     w2v_model = loadModel()
-    filepath = '../stopwords_words.txt'
-    stopwords = preprocess_server.getStopwords(filepath)
-    inputfile = '../company_name_test.txt'
+    # filepath = '../stopwords_words.txt'
+    # stopwords = preprocess_server.getStopwords(filepath)
+    inputfile = '../company_name_full_calculate.txt'
     outputfile = './test_result_agg.txt'
     base_result, predict_result = predict_agg(inputfile, w2v_model, outputfile)
     evaluation(base_result, predict_result)
@@ -275,7 +276,7 @@ if __name__ == '__main__':
     # main_straight()
 
     # 组合方法
-    # main_agg()
+    main_agg()
 
     # gensim方法
-    main_gensim()
+    # main_gensim()
