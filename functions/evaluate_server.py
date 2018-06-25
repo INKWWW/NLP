@@ -254,6 +254,7 @@ def main_agg():
     inputfile = '../company_name_full_calculate.txt'
     outputfile = './test_result_agg.txt'
     base_result, predict_result = predict_agg(inputfile, outputfile, stopwords, w2v_model)
+    print('-------组合方法-------')
     evaluation(base_result, predict_result)
 
 
@@ -264,6 +265,7 @@ def main_gensim():
     # resultpath = './test_result_gensim_qw.txt' -- for qw
     resultpath = './test_result_gensim.txt'
     base_result, predict_result = predict_gensim(inputfile, w2v_model, resultpath)
+    print('--------Gensim--------')
     evaluation(base_result, predict_result)
 
 
@@ -280,4 +282,4 @@ if __name__ == '__main__':
     main_agg()
 
     # gensim方法
-    # main_gensim()
+    main_gensim()
