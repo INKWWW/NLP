@@ -142,12 +142,13 @@ def predict_agg(inputfile, outputfile, stopwords, model):
     predict_result = []
     with open(inputfile, 'r', encoding='gbk') as f:
         fread = f.read()
-        lines = fread.split()
+        lines = fread.split('\n')
         for line in lines:
+            # print(line)
             line_split = line.split(',')
-            base_name.append(line_split[1])
-            input_name.append(line_split[0])
-            base_result.append(line_split[2])      
+            base_name.append(line_split[1])  # 根据三要素从公司库中提取的公司名称
+            input_name.append(line_split[0])  # 客户输入的公司名称
+            base_result.append(line_split[3]) # 1、0、-1 -- 人工标注答案    
             
     length = len(input_name)
 
