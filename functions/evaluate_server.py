@@ -248,11 +248,11 @@ def main_straight():
 
 def main_agg():
     w2v_model = loadModel()
-    # filepath = '../stopwords_words.txt'
-    # stopwords = preprocess_server.getStopwords(filepath)
+    filepath = '../stopwords_words.txt'
+    stopwords = preprocess_server.getStopwords(filepath)
     inputfile = '../company_name_full_calculate.txt'
     outputfile = './test_result_agg.txt'
-    base_result, predict_result = predict_agg(inputfile, w2v_model, outputfile)
+    base_result, predict_result = predict_agg(inputfile, outputfile, stopwords, w2v_model)
     evaluation(base_result, predict_result)
 
 
