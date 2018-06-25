@@ -16,9 +16,10 @@ import preprocess_server
 def loadModel():
     # model_output = '../word2vec_model_skip_stopwords_win3.model'    
     # model_output = '../word2vec_model_skip_stopwords_fasttext_win3.model'  # 其实是win2
-    model_output = '../word2vec_model_skip_stopwords.model'
+    # model_output = '../word2vec_model_skip_stopwords.model'
     # model_output = '../word2vec_model_cbow_stopwords_win1.model'
     # model_output = '../word2vec_model_skip_stopwords_win1.model'
+    model_output = '../word2vec_model_skip_stopwords_qw_win1.model'
     return run_model_server.loadModel(model_output)
 
 
@@ -257,7 +258,7 @@ def main_gensim():
     w2v_model = loadModel()
     # inputfile = '../company_name_full_test.txt'
     inputfile = '../company_name_full_calculate.txt'
-    resultpath = './test_result_gensim.txt'
+    resultpath = './test_result_gensim_qw.txt'
     base_result, predict_result = predict_gensim(inputfile, w2v_model, resultpath)
     evaluation(base_result, predict_result)
 

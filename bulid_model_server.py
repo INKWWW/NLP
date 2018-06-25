@@ -34,7 +34,7 @@ def getStopwords(filepath):
 # 分词作为模型训练输入
 def parserCompanyName(name_generator, stopwords):
     train_sen = []
-    with open('./parser_company_name_10000V2_stopwords.txt', 'w') as f:
+    with open('./parser_company_name_qw.txt', 'w') as f:
         for item in name_generator:
             parser_list = jieba.lcut(item[0])
             parser_list = [item for item in parser_list if item not in stopwords]
@@ -90,7 +90,7 @@ def trigger():
     # company_name_file = '\\company_name.txt
 
     # 加载公司名称文本
-    company_name_file = '../company_name/dw_list_train.txt'
+    company_name_file = '../company_name/dw_list_train_qw.txt'
     sentences = GetSentences(company_name_file)
     # readLineFromGenerator(sentences)
 
@@ -103,7 +103,7 @@ def trigger():
 
     # 训练并保存模型
     # word2vec model
-    model_name = './word2vec_model_cbow_stopwords_win1.model'
+    model_name = './word2vec_model_skip_stopwords_qw_win1.model'
     model_output = model_name
     print('Training...')
     trainModel(train_sen, model_output)
@@ -151,7 +151,7 @@ if __name__ == '__main__':
     CPU_NUM = 4  # CPU核心数
     VEC_SIZE = 200  # size - 特征向量维度
     CONTEXT_WINDOW = 1  # window - 上下文提取词的最大距离
-    SG = 0  # 1 -> skip-gram; Otherwise, 0: CBOW is used.
+    SG = 1  # 1 -> skip-gram; Otherwise, 0: CBOW is used.
 
     # MIN_COUNT = 0  # 忽略词频小于MIN_COUNT的  
     # CPU_NUM = 4  # CPU核心数
