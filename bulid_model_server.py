@@ -37,6 +37,7 @@ def parserCompanyName(name_generator, stopwords):
     train_sen = []
     with open('./parser_company_name_qw.txt', 'w') as f:
         for item in name_generator:
+            # 可以考虑建模的时候就把stopwords先排除掉，就像run_model_server.main_gensim中一样
             parser_list = jieba.lcut(item[0])
             parser_list = [item for item in parser_list if item not in stopwords]
             train_sen.append(parser_list)

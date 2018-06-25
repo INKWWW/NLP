@@ -135,6 +135,9 @@ def main_gensim(model, test_sentence_1, test_sentence_2):
     if test_sentence_1 == 'null' or len(test_sentence_2) > 50:
         similarity = -1
     else:
+        for stop in stopwords:
+            test_sentence_1 = test_sentence_1.replace(stop, '')
+            test_sentence_2 = test_sentence_2.replace(stop, '')
         split_sen = jieba.lcut(test_sentence_1)
         split_sen_1 = [item for item in split_sen if (item not in stopwords) and (item in model.wv.vocab)]
         split_sen = jieba.lcut(test_sentence_2)
