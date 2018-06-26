@@ -6,6 +6,7 @@
 import os
 import copy
 import jieba
+import csv
 
 dirname = print(os.getcwd())
 
@@ -102,7 +103,7 @@ def predict(input_file, out_file, stopwords):
             
             content = test_sentence_1 + ',' + test_sentence_2 + ',' + base_result[i] + ',' + predict_result[i] + ',' + str(result) + '\n'
             fw.write(content)
-    return base_result, predict_result
+    return base_result, predict_result         
 
 
 def main():
@@ -119,3 +120,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+   

@@ -37,7 +37,6 @@ def parserCompanyName(name_generator, stopwords):
     train_sen = []
     with open('./parser_company_name_qw.txt', 'w') as f:
         for item in name_generator:
-            # 可以考虑建模的时候就把stopwords先排除掉，就像run_model_server.main_gensim中一样
             parser_list = jieba.lcut(item[0])
             parser_list = [item for item in parser_list if item not in stopwords]
             train_sen.append(parser_list)
@@ -46,6 +45,25 @@ def parserCompanyName(name_generator, stopwords):
                 tem = tem + i + ' '
             tem = tem + '\n'
             f.write(tem)
+    return train_sen
+
+####  修改版-分词作为模型训练输入
+def modifyParserCompanyName(name_generator, stopwords):
+    train_sen = []
+    # with open('./parser_company_name_qw.txt', 'w') as f:  # Do not write for improving efficiency
+    for item in name_generator:
+        # 考虑建模的时候就把stopwords先排除掉，就像run_model_server.main_gensim中一样
+        # sen = item[0]
+        for stop in stopwords:
+            sen = item[0].replace(stop, '')
+        parser_list = jieba.lcut(sen)
+        parser_list = [item for item in parser_list if item not in stopwords]
+        train_sen.append(parser_list)
+        # tem = ''
+        # for i in parser_list:
+        #     tem = tem + i + ' '
+        # tem = tem + '\n'
+        # f.write(tem)
     return train_sen
 
 # 训练模型
@@ -57,7 +75,7 @@ def trainModel(train_sen, model_output):
     word2vec_model.save(model_output)
 
 # 训练模型
-def trainModel_fasttext(train_sen, model_output):    
+def trainModel_fasttext(train_sen, model_output): 
     # sentences = GetSentences(file_input)
     # yield sentences
     # sentences = list(sentences)
@@ -100,8 +118,11 @@ def trigger():
     stopwords = getStopwords(stopwords_file)
 
     # 分词 - 作为训练模型的输入
-    train_sen = parserCompanyName(sentences, stopwords)
+    ##### 初始版训练方法 #####
+    # train_sen = parserCompanyName(sentences, stopwords)
     # print(train_sen)
+    ##### 修改版训练方法 #####
+    train_sen = modifyParserCompanyName(sentences, stopwords)
 
     # 训练并保存模型
     # word2vec model

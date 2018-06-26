@@ -4,6 +4,7 @@
 import os
 import copy
 import jieba
+import csv
 
 dirname = print(os.getcwd())
 
@@ -103,6 +104,19 @@ def predict(input_file, out_file, stopwords):
     return base_result, predict_result
 
 
+def txtToCSV(txt_filepath, csv_filepath):
+    header = ['公司名称（客户输入）', '匹配出来的公司结果', '职业信息验证（画像匹配结果）', '标注']
+    with open(txt_filepath, 'r') as f:
+        fread = f.read()
+        lines = fread.split('\n')
+        with open(csv_filepath, 'w', newline='') as fw:
+            fwriter = csv.writer(fw)
+            fwriter.writerow(header)
+            for line in lines:
+                words = line.split(',')
+                fwriter.writerow(words)         
+
+
 def main():
     filepath = 'stopwords_words.txt'
     stopwords = getStopwords(filepath)
@@ -116,4 +130,9 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # main()
+
+    # txt to csv
+    txt_filepath = 'company_name_full_calculate.txt'
+    csv_filepath = '公司名称_标注.csv'
+    txtToCSV(txt_filepath, csv_filepath)
