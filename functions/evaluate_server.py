@@ -282,7 +282,7 @@ if __name__ == '__main__':
     # main_straight()
 
     # 组合方法
-    main_agg()
+    # main_agg()
 
     # gensim方法
-    # main_gensim()
+    main_gensim()
