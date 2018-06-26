@@ -53,9 +53,9 @@ def modifyParserCompanyName(name_generator, stopwords):
     # with open('./parser_company_name_qw.txt', 'w') as f:  # Do not write for improving efficiency
     for item in name_generator:
         # 考虑建模的时候就把stopwords先排除掉，就像run_model_server.main_gensim中一样
-        # sen = item[0]
+        sen = item[0]
         for stop in stopwords:
-            sen = item[0].replace(stop, '')
+            sen = sen.replace(stop, '')
         parser_list = jieba.lcut(sen)
         parser_list = [item for item in parser_list if item not in stopwords]
         train_sen.append(parser_list)
