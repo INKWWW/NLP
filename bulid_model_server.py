@@ -67,7 +67,7 @@ def modifyParserCompanyName(name_generator, stopwords):
     return train_sen
 
 # 训练模型
-def trainModel(train_sen, model_output):         
+def trainModel(train_sen, model_output):      
     # sentences = GetSentences(file_input)
     # yield sentences
     # sentences = list(sentences)
@@ -75,7 +75,7 @@ def trainModel(train_sen, model_output):
     word2vec_model.save(model_output)
 
 # 训练模型
-def trainModel_fasttext(train_sen, model_output): 
+def trainModel_fasttext(train_sen, model_output):
     # sentences = GetSentences(file_input)
     # yield sentences
     # sentences = list(sentences)
@@ -110,7 +110,8 @@ def trigger():
     # company_name_file = '\\company_name.txt
 
     # 加载公司名称文本
-    company_name_file = '../company_name/dw_list_train_qw.txt'
+    # company_name_file = '../company_name/dw_list_train_qw.txt'
+    company_name_file = '../company_name/dw_list_train_all.txt'
     sentences = GetSentences(company_name_file)
     # readLineFromGenerator(sentences)
 
@@ -126,7 +127,8 @@ def trigger():
 
     # 训练并保存模型
     # word2vec model
-    model_name = './word2vec_model_skip_stopwords_qw_win2.model'
+    # model_name = './word2vec_model_skip_stopwords_qw_win2.model'
+    model_name = './word2vec_model_skip_stopwords_all_win2.model'
     model_output = model_name
     print('Training...')
     trainModel(train_sen, model_output)
@@ -171,7 +173,7 @@ if __name__ == '__main__':
 
     # window = 2
     MIN_COUNT = 0  # 忽略词频小于MIN_COUNT的  
-    CPU_NUM = 10  # CPU核心数
+    CPU_NUM = 12  # CPU核心数
     VEC_SIZE = 200  # size - 特征向量维度
     CONTEXT_WINDOW = 2  # window - 上下文提取词的最大距离
     SG = 1  # 1 -> skip-gram; Otherwise, 0: CBOW is used.
