@@ -22,7 +22,7 @@ def getStopwords(filepath):
 def processSen(test_sentence_1, test_sentence_2, stopwords):
     for stop in stopwords:
         test_sentence_1 = test_sentence_1.replace(stop, '')
-        test_sentence_2 = test_sentence_2.replace(stop, '')        
+        test_sentence_2 = test_sentence_2.replace(stop, '')     
     sen_1_parser = jieba.lcut(test_sentence_1)
     sen_1_parser = [item for item in sen_1_parser if item not in stopwords]
     sen_2_parser = jieba.lcut(test_sentence_2)
@@ -57,9 +57,9 @@ def compare(shorter_sen, longer_sen):
     else:
         for item in shorter_sen_copy:
             for item_l in longer_sen_copy:
-                if item in item_l:
-                    indexs_s = [i for i, v in enumerate(shorter_sen_copy) if v in item]
-                    indexs_l = [i for i, v in enumerate(longer_sen_copy) if v in item_l]
+                if item in item_l or item_l in item:
+                    indexs_s = [i for i, v in enumerate(shorter_sen_copy) if v==item]
+                    indexs_l = [i for i, v in enumerate(longer_sen_copy) if v==item_l]
                     for index in indexs_s:
                         shorter_sen_copy.pop(index)
                     for index in indexs_l:
