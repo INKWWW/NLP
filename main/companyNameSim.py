@@ -13,14 +13,16 @@ class CompanyNameSim(object):
         self.input_name = input_name
         self.query_name = query_name
 
+
     @ classmethod
     def loadParam(cls, params):
         model = params['modelPath']
         stopword = params['stopwords']
-        cls.w2v_model = self.loadModel(model['model_path'])  # 创建类变量，后面非类函数可以试用self取用
-        cls.stopwords = self.loadStopWords(stopword['stopword_path'])       
+        cls.w2v_model = cls.loadModel(model['model_path'])  # 创建类变量，后面非类函数可以试用self取用
+        cls.stopwords = cls.loadStopWords(stopword['stopword_path'])    
 
 
+    @ classmethod
     def loadModel(self, model_wv):
         '''load model with suffix '.wv'        
         Arguments:
@@ -28,8 +30,9 @@ class CompanyNameSim(object):
         '''
         Word2Vec.wv.load(model_wv)
         print('load model successfully')
+        
 
-
+    @ classmethod
     def loadStopWords(self, stopword_file):
         '''load stopword_file
         Arguments:
