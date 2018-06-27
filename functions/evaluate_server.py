@@ -17,14 +17,14 @@ import preprocess_server
 def loadModel():
     # model_output = '../word2vec_model_skip_stopwords_win3.model'    
     # model_output = '../word2vec_model_skip_stopwords_fasttext_win3.model'  # 其实是win2
-    # model_output = '../word2vec_model_skip_stopwords.model'
+    model_output = '../word2vec_model_skip_stopwords.model'
     # model_output = '../word2vec_model_cbow_stopwords_win1.model'
     # model_output = '../word2vec_model_skip_stopwords_win1.model'
     # model_output = '../word2vec_model_skip_stopwords_qw_win1.model'
     # model_output = '../word2vec_model_skip_stopwords_qw_win2.model'
     # model_output = '../word2vec_model_skip_stopwords_all_win2.model'
     # model_output = '../word2vec_model_skip_stopwords_new.model'
-    model_output = '../word2vec_model_skip_stopwords_all_win2_400.model'
+    # model_output = '../word2vec_model_skip_stopwords_all_win2_400.model'
     return run_model_server.loadModel(model_output)
 
 
@@ -175,7 +175,7 @@ def predict_agg(inputfile, outputfile, stopwords, model):
                 similarity = run_model_server.main_gensim(model, test_sentence_1, test_sentence_2)
 
                 ##### 针对euclidean Distance
-                if similarity > 0.85:
+                if similarity > 0.95:
                     predict_result.append('1')
                 else:
                     predict_result.append('0')
@@ -212,7 +212,7 @@ def predict_gensim(inputfile, model, resultpath):
             test_sentence_2 = input_name[i]
             similarity = run_model_server.main_gensim(model, test_sentence_1, test_sentence_2)
 
-            if similarity > 0.85:
+            if similarity > 0.95:
                 predict_result.append('1')
             else:
                 predict_result.append('0')
@@ -256,8 +256,8 @@ def main_agg():
     filepath = '../stopwords_words.txt'
     stopwords = preprocess_server.getStopwords(filepath)
     inputfile = '../company_name_full_calculate.txt'
-    # outputfile = './test_result_agg.txt'
-    outputfile = './test_result_agg_400.txt'
+    outputfile = './test_result_agg_V1.txt'
+    # outputfile = './test_result_agg_400.txt'
     base_result, predict_result = predict_agg(inputfile, outputfile, stopwords, w2v_model)
     print('-------组合方法-------')
     evaluation(base_result, predict_result)
@@ -290,4 +290,4 @@ if __name__ == '__main__':
     main_agg()
 
     # gensim方法
-    main_gensim()
+    # main_gensim()
