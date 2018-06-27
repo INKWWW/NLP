@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import jieba
+
 class VariousMethods(object):
     """docstring for Functions"""
     def __init__(self, input_name, query_name, stopwords, model):
@@ -87,9 +89,9 @@ class VariousMethods(object):
             similarity = -1
         else:
             split_sen = self.tokenizer(self.query_name)
-            split_sen_1 = [item for item in split_sen if (item not in stopwords) and (item in model.wv.vocab)]  # ensure words in the vocab
+            split_sen_1 = [item for item in split_sen if (item not in stopwords) and (item in model.vocab)]  # ensure words in the vocab
             split_sen = self.tokenizer(self.input_name)
-            split_sen_2 = [item for item in split_sen if (item not in stopwords) and (item in model.wv.vocab)]
+            split_sen_2 = [item for item in split_sen if (item not in stopwords) and (item in model.vocab)]
             if len(split_sen_1) == 0 or len(split_sen_2) == 0:
                 similarity = 0
             else:
