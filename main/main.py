@@ -7,7 +7,10 @@ from conf import param_list
 
 
 def parseJson(jsonFile):
-    '''{ "com_name": {"input": input_name, "query": query_name} }'''
+    '''Handle josn file    
+    Arguments:
+        jsonFile {[type]} -- [path of .json file] -{ "com_name": {"input": input_name, "query": query_name} }
+    '''
     with open(jsonFile, 'r') as fr:
         load_f = json.load(fr)
         input_name = load_f['com_name']['input']
@@ -16,6 +19,7 @@ def parseJson(jsonFile):
 
 
 def main(input_name, query_name):
+    '''operation'''
     companyNameSim.CompanyNameSim.loadParam(param_list)
     comNameSim = companyNameSim.CompanyNameSim(input_name, query_name)
     result = comNameSim.main()

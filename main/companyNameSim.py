@@ -17,6 +17,7 @@ class CompanyNameSim(object):
 
     @ classmethod
     def loadParam(cls, params):
+        '''load params from conf.params'''
         model = params['modelPath']
         stopword = params['stopwords']
         cls.w2v_model = cls.loadModel(model['model_path'])  # 创建类变量，后面非类函数可以试用self取用

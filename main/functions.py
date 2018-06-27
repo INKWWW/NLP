@@ -74,13 +74,14 @@ class VariousMethods(object):
 
 
     def match_straight(self):
+        '''match staightly'''
         shorter_sen, longer_sen = self.processSen()
         result = self.compare(shorter_sen, longer_sen)
         return result
         
 
     def main_gensim(self):
-        '''    
+        '''match through gensim model
         Arguments:
             model {[type]} -- [description]
             self.query_name {[type]} -- 库中地址
@@ -101,7 +102,7 @@ class VariousMethods(object):
 
 
     def predict_agg(self):
-        '''matching word'''        
+        '''The whole process of matching two company names'''
         result = self.match_straight()
         if result:
             return 1
