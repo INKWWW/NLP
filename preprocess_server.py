@@ -20,6 +20,9 @@ def getStopwords(filepath):
         return words.split('\n')
 
 def processSen(test_sentence_1, test_sentence_2, stopwords):
+    for stop in stopwords:
+        test_sentence_1 = test_sentence_1.replace(stop, '')
+        test_sentence_2 = test_sentence_2.replace(stop, '')        
     sen_1_parser = jieba.lcut(test_sentence_1)
     sen_1_parser = [item for item in sen_1_parser if item not in stopwords]
     sen_2_parser = jieba.lcut(test_sentence_2)

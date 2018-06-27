@@ -23,7 +23,8 @@ def loadModel():
     # model_output = '../word2vec_model_skip_stopwords_qw_win1.model'
     # model_output = '../word2vec_model_skip_stopwords_qw_win2.model'
     # model_output = '../word2vec_model_skip_stopwords_all_win2.model'
-    model_output = '../word2vec_model_skip_stopwords_new.model'
+    # model_output = '../word2vec_model_skip_stopwords_new.model'
+    model_output = '../word2vec_model_skip_stopwords_all_win2_400.model'
     return run_model_server.loadModel(model_output)
 
 
@@ -201,7 +202,7 @@ def predict_gensim(inputfile, model, resultpath):
             line_split = line.split(',')
             base_name.append(line_split[1])  # 根据三要素从公司库中提取的公司名称
             input_name.append(line_split[0])  # 客户输入的公司名称
-            base_result.append(line_split[3]) # 1、0、-1 -- 人工标注答案 
+            base_result.append(line_split[3])  # 1、0、-1 -- 人工标注答案 
             
     length = len(input_name)
 
@@ -211,7 +212,7 @@ def predict_gensim(inputfile, model, resultpath):
             test_sentence_2 = input_name[i]
             similarity = run_model_server.main_gensim(model, test_sentence_1, test_sentence_2)
 
-            if similarity > 0.95:
+            if similarity > 0.89:
                 predict_result.append('1')
             else:
                 predict_result.append('0')
@@ -266,8 +267,9 @@ def main_gensim():
     # inputfile = '../company_name_full_test.txt'
     inputfile = '../company_name_full_calculate.txt'
     # resultpath = './test_result_gensim_qw.txt' # for qw
-    resultpath = './test_result_gensim.txt'
+    # resultpath = './test_result_gensim.txt'
     # resultpath = './test_result_gensim_all.txt' # for all
+    resultpath = './test_result_gensim_all_400.txt' # for all
 
     base_result, predict_result = predict_gensim(inputfile, w2v_model, resultpath)
     print('--------Gensim--------')
@@ -284,7 +286,7 @@ if __name__ == '__main__':
     # main_straight()
 
     # 组合方法
-    main_agg()
+    # main_agg()
 
     # gensim方法
     main_gensim()
