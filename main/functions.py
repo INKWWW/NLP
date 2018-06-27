@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import jieba
+import copy
 
 class VariousMethods(object):
     """docstring for Functions"""
