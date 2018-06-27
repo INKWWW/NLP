@@ -49,7 +49,7 @@ class CompanyNameSim(object):
         '''Main function to decide whether these two company names are similar
 
         '''
-        function = functions.VariousMethods(self.input_name, self.query_name, self.stopwords, self.w2c_model)
+        function = functions.VariousMethods(self.input_name, self.query_name, self.stopwords, self.w2v_model)
         result = function.predict_agg()
         return result
         
