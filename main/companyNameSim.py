@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from main import functions
+import functions
 from conf import param_list
 from gensim.models import Word2Vec
 import functions
