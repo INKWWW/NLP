@@ -3,6 +3,7 @@
 
 import companyNameSim
 import json
+from conf import param_list
 
 
 def parseJson(jsonFile):
@@ -15,6 +16,7 @@ def parseJson(jsonFile):
 
 
 def main(input_name, query_name):
+    companyNameSim.CompanyNameSim.loadParam(param_list)
     comNameSim = companyNameSim.CompanyNameSim(input_name, query_name)
     comNameSim.main()
 
@@ -22,5 +24,6 @@ def main(input_name, query_name):
 if __name__ == '__main__':
     jsonFile = './test.json'
     input_name, query_name = parseJson(jsonFile)
+
     result = main(input_name, query_name)
     print('result is {}'.format(result))
