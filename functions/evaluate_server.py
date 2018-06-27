@@ -17,14 +17,14 @@ import preprocess_server
 def loadModel():
     # model_output = '../word2vec_model_skip_stopwords_win3.model'    
     # model_output = '../word2vec_model_skip_stopwords_fasttext_win3.model'  # 其实是win2
-    # model_output = '../word2vec_model_skip_stopwords.model'
+    model_output = '../word2vec_model_skip_stopwords.model'
     # model_output = '../word2vec_model_cbow_stopwords_win1.model'
     # model_output = '../word2vec_model_skip_stopwords_win1.model'
     # model_output = '../word2vec_model_skip_stopwords_qw_win1.model'
     # model_output = '../word2vec_model_skip_stopwords_qw_win2.model'
     # model_output = '../word2vec_model_skip_stopwords_all_win2.model'
     # model_output = '../word2vec_model_skip_stopwords_new.model'
-    model_output = '../word2vec_model_skip_stopwords_all_win2_400.model'
+    # model_output = '../word2vec_model_skip_stopwords_all_win2_400.model'
     return run_model_server.loadModel(model_output)
 
 
@@ -286,7 +286,7 @@ if __name__ == '__main__':
     # main_straight()
 
     # 组合方法
-    # main_agg()
+    main_agg()
 
     # gensim方法
-    main_gensim()
+    # main_gensim()
