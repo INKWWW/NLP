@@ -4,6 +4,7 @@
 import functions
 from conf import param_list
 from gensim.models import Word2Vec
+from gensim.models import KeyedVectors
 import functions
 
 
@@ -28,9 +29,9 @@ class CompanyNameSim(object):
         Arguments:
             model_wv {[type]} -- [path of this model]
         '''
-        Word2Vec.wv.load(model_wv)
+        KeyedVectors.load(model_wv)
         print('load model successfully')
-        
+
 
     @ classmethod
     def loadStopWords(self, stopword_file):
