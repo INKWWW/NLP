@@ -175,7 +175,7 @@ def predict_agg(inputfile, outputfile, stopwords, model):
                 similarity = run_model_server.main_gensim(model, test_sentence_1, test_sentence_2)
 
                 ##### 针对euclidean Distance
-                if similarity > 0.89:
+                if similarity > 0.85:
                     predict_result.append('1')
                 else:
                     predict_result.append('0')
@@ -212,7 +212,7 @@ def predict_gensim(inputfile, model, resultpath):
             test_sentence_2 = input_name[i]
             similarity = run_model_server.main_gensim(model, test_sentence_1, test_sentence_2)
 
-            if similarity > 0.89:
+            if similarity > 0.85:
                 predict_result.append('1')
             else:
                 predict_result.append('0')
