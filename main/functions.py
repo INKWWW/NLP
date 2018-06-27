@@ -4,6 +4,7 @@
 import jieba
 import copy
 
+
 class VariousMethods(object):
     """docstring for Functions"""
     def __init__(self, input_name, query_name, stopwords, model):

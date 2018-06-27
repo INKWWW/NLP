@@ -17,12 +17,12 @@ import preprocess_server
 def loadModel():
     # model_output = '../word2vec_model_skip_stopwords_win3.model'    
     # model_output = '../word2vec_model_skip_stopwords_fasttext_win3.model'  # 其实是win2
-    model_output = '../word2vec_model_skip_stopwords.model'
+    # model_output = '../word2vec_model_skip_stopwords.model'
     # model_output = '../word2vec_model_cbow_stopwords_win1.model'
     # model_output = '../word2vec_model_skip_stopwords_win1.model'
     # model_output = '../word2vec_model_skip_stopwords_qw_win1.model'
     # model_output = '../word2vec_model_skip_stopwords_qw_win2.model'
-    # model_output = '../word2vec_model_skip_stopwords_all_win2.model'
+    model_output = '../word2vec_model_skip_stopwords_all_win2.model'
     # model_output = '../word2vec_model_skip_stopwords_new.model'
     # model_output = '../word2vec_model_skip_stopwords_all_win2_400.model'
     return run_model_server.loadModel(model_output)
@@ -175,7 +175,7 @@ def predict_agg(inputfile, outputfile, stopwords, model):
                 similarity = run_model_server.main_gensim(model, test_sentence_1, test_sentence_2)
 
                 ##### 针对euclidean Distance
-                if similarity > 0.95:
+                if similarity > 0.89:
                     predict_result.append('1')
                 else:
                     predict_result.append('0')
