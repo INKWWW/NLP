@@ -111,7 +111,8 @@ def trigger():
 
     # 加载公司名称文本
     # company_name_file = '../company_name/dw_list_train_qw.txt'
-    company_name_file = '../company_name/dw_list_train_all.txt'
+    # company_name_file = '../company_name/dw_list_train_all.txt'
+    company_name_file = '../company_name/dw_list_train.txt'
     sentences = GetSentences(company_name_file)
     # readLineFromGenerator(sentences)
 
@@ -128,7 +129,8 @@ def trigger():
     # 训练并保存模型
     # word2vec model
     # model_name = './word2vec_model_skip_stopwords_qw_win2.model'
-    model_name = './word2vec_model_skip_stopwords_all_win2.model'
+    # model_name = './word2vec_model_skip_stopwords_all_win2.model'
+    model_name = './word2vec_model_skip_stopwords_new.model'
     model_output = model_name
     print('Training...')
     trainModel(train_sen, model_output)
