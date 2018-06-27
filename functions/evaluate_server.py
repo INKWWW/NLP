@@ -22,9 +22,9 @@ def loadModel():
     # model_output = '../word2vec_model_skip_stopwords_win1.model'
     # model_output = '../word2vec_model_skip_stopwords_qw_win1.model'
     # model_output = '../word2vec_model_skip_stopwords_qw_win2.model'
-    model_output = '../word2vec_model_skip_stopwords_all_win2.model'
+    # model_output = '../word2vec_model_skip_stopwords_all_win2.model'
     # model_output = '../word2vec_model_skip_stopwords_new.model'
-    # model_output = '../word2vec_model_skip_stopwords_all_win2_400.model'
+    model_output = '../word2vec_model_skip_stopwords_all_win2_400.model'
     return run_model_server.loadModel(model_output)
 
 
@@ -256,7 +256,8 @@ def main_agg():
     filepath = '../stopwords_words.txt'
     stopwords = preprocess_server.getStopwords(filepath)
     inputfile = '../company_name_full_calculate.txt'
-    outputfile = './test_result_agg.txt'
+    # outputfile = './test_result_agg.txt'
+    outputfile = './test_result_agg_400.txt'
     base_result, predict_result = predict_agg(inputfile, outputfile, stopwords, w2v_model)
     print('-------组合方法-------')
     evaluation(base_result, predict_result)
@@ -289,4 +290,4 @@ if __name__ == '__main__':
     main_agg()
 
     # gensim方法
-    # main_gensim()
+    main_gensim()
