@@ -18,7 +18,8 @@ def parseJson(jsonFile):
 def main(input_name, query_name):
     companyNameSim.CompanyNameSim.loadParam(param_list)
     comNameSim = companyNameSim.CompanyNameSim(input_name, query_name)
-    comNameSim.main()
+    result = comNameSim.main()
+    return result
 
 
 if __name__ == '__main__':
