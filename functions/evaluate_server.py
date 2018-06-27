@@ -22,7 +22,8 @@ def loadModel():
     # model_output = '../word2vec_model_skip_stopwords_win1.model'
     # model_output = '../word2vec_model_skip_stopwords_qw_win1.model'
     # model_output = '../word2vec_model_skip_stopwords_qw_win2.model'
-    model_output = '../word2vec_model_skip_stopwords_all_win2.model'
+    # model_output = '../word2vec_model_skip_stopwords_all_win2.model'
+    model_output = '../word2vec_model_skip_stopwords_new.model'
     return run_model_server.loadModel(model_output)
 
 
@@ -265,8 +266,9 @@ def main_gensim():
     # inputfile = '../company_name_full_test.txt'
     inputfile = '../company_name_full_calculate.txt'
     # resultpath = './test_result_gensim_qw.txt' # for qw
-    # resultpath = './test_result_gensim.txt'
-    resultpath = './test_result_gensim_all.txt' # for all
+    resultpath = './test_result_gensim.txt'
+    # resultpath = './test_result_gensim_all.txt' # for all
+
     base_result, predict_result = predict_gensim(inputfile, w2v_model, resultpath)
     print('--------Gensim--------')
     evaluation(base_result, predict_result)
@@ -285,4 +287,4 @@ if __name__ == '__main__':
     main_agg()
 
     # gensim方法
-    # main_gensim()
+    main_gensim()
