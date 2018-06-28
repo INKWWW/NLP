@@ -105,16 +105,29 @@ def predict(input_file, out_file, stopwords):
 
 
 def txtToCSV(txt_filepath, csv_filepath):
-    header = ['公司名称（客户输入）', '匹配出来的公司结果', '职业信息验证（画像匹配结果）', '标注']
-    with open(txt_filepath, 'r') as f:
+    # header = ['公司名称（客户输入）', '库中查询出来的公司', '职业信息验证（画像匹配结果）', '标注']
+    header = ['公司名称（客户输入）', '库中查询出来的公司', '人工标注', '模型输出']
+    with open(txt_filepath, 'r', encoding='utf-8') as f:
         fread = f.read()
         lines = fread.split('\n')
+        # with open(csv_filepath, 'w', newline='') as fw:
+        #     fwriter = csv.writer(fw)
+        #     fwriter.writerow(header)
+        #     for line in lines:
+        #         words = line.split(',')
+        #         fwriter.writerow(words)         
+
         with open(csv_filepath, 'w', newline='') as fw:
             fwriter = csv.writer(fw)
             fwriter.writerow(header)
             for line in lines:
+                content = []
                 words = line.split(',')
-                fwriter.writerow(words)         
+                content.append(words[1])
+                content.append(words[0])
+                content.append(words[2])
+                content.append(words[3])
+                fwriter.writerow(content)         
 
 
 def main():
@@ -133,6 +146,8 @@ if __name__ == '__main__':
     # main()
 
     # txt to csv
-    txt_filepath = 'company_name_full_calculate.txt'
-    csv_filepath = '公司名称_标注.csv'
+    # txt_filepath = 'company_name_full_calculate.txt'
+    # csv_filepath = '公司名称_标注.csv'
+    txt_filepath = 'functions/test_result_agg_V1.txt'
+    csv_filepath = '测试结果.csv'
     txtToCSV(txt_filepath, csv_filepath)
