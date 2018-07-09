@@ -132,7 +132,7 @@ def trigger():
     # model_name = './word2vec_model_skip_stopwords_all_win2.model'
     # model_name = './word2vec_model_skip_stopwords_new.model'
     # model_name = './word2vec_model_skip_stopwords_all_win2_400.model'
-    model_name = './word2vec_model_skip_stopwords_bw_win2.model'
+    model_name = './word2vec_model_skip_stopwords_bw_win2_100d.model'
     model_output = model_name
     print('Training...')
     trainModel(train_sen, model_output)
