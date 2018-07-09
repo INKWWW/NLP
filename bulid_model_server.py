@@ -111,8 +111,8 @@ def trigger():
 
     # 加载公司名称文本
     # company_name_file = '../company_name/dw_list_train_qw.txt'
-    company_name_file = '../company_name/dw_list_train_all.txt'
-    # company_name_file = '../company_name/dw_list_train.txt'
+    # company_name_file = '../company_name/dw_list_train_all.txt'
+    company_name_file = '../company_name/dw_list_train.txt'
     sentences = GetSentences(company_name_file)
     # readLineFromGenerator(sentences)
 
@@ -131,7 +131,8 @@ def trigger():
     # model_name = './word2vec_model_skip_stopwords_qw_win2.model'
     # model_name = './word2vec_model_skip_stopwords_all_win2.model'
     # model_name = './word2vec_model_skip_stopwords_new.model'
-    model_name = './word2vec_model_skip_stopwords_all_win2_400.model'
+    # model_name = './word2vec_model_skip_stopwords_all_win2_400.model'
+    model_name = './word2vec_model_skip_stopwords_bw_win2.model'
     model_output = model_name
     print('Training...')
     trainModel(train_sen, model_output)
@@ -174,19 +175,19 @@ if __name__ == '__main__':
 
     # 训练常量设置
 
-    # window = 2
+    # # window = 2
+    # MIN_COUNT = 0  # 忽略词频小于MIN_COUNT的  
+    # CPU_NUM = 12  # CPU核心数
+    # # VEC_SIZE = 200  # size - 特征向量维度
+    # VEC_SIZE = 400  # size - 特征向量维度
+    # CONTEXT_WINDOW = 2  # window - 上下文提取词的最大距离
+    # SG = 1  # 1 -> skip-gram; Otherwise, 0: CBOW is used.
+
     MIN_COUNT = 0  # 忽略词频小于MIN_COUNT的  
     CPU_NUM = 12  # CPU核心数
-    # VEC_SIZE = 200  # size - 特征向量维度
-    VEC_SIZE = 400  # size - 特征向量维度
+    VEC_SIZE = 200  # size - 特征向量维度
     CONTEXT_WINDOW = 2  # window - 上下文提取词的最大距离
-    SG = 1  # 1 -> skip-gram; Otherwise, 0: CBOW is used.
-
-    # MIN_COUNT = 0  # 忽略词频小于MIN_COUNT的  
-    # CPU_NUM = 4  # CPU核心数
-    # VEC_SIZE = 200  # size - 特征向量维度
-    # CONTEXT_WINDOW = 1  # window - 上下文提取词的最大距离
-    # SG = 1  # 1 -> skip-gram; Otherwise, CBOW is used.
+    SG = 1  # 1 -> skip-gram; Otherwise, CBOW is used.
 
     # # window = 3
     # MIN_COUNT = 0  # 忽略词频小于MIN_COUNT的  
